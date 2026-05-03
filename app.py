@@ -1,6 +1,8 @@
 from flask import Flask, request, render_template_string
 import urllib.parse
 import os
+from datetime import datetime
+import random
 
 app = Flask(__name__)
 
@@ -8,116 +10,144 @@ HTML = """
 <!DOCTYPE html>
 <html>
 <head>
-<title>TradeOS Quote</title>
+<title>TradeOS Instant Quote</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body {
   font-family: Arial;
-  background: #f5f5f5;
-  padding: 20px;
+  background: #f4f6f8;
+  margin: 0;
 }
 .container {
+  max-width: 420px;
+  margin: 30px auto;
   background: white;
   padding: 20px;
   border-radius: 10px;
-  max-width: 400px;
-  margin: auto;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 h2 {
   text-align: center;
+  margin-bottom: 20px;
 }
-input, select {
+label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+}
+select, input {
   width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 6px;
   border: 1px solid #ccc;
+  font-size: 14px;
 }
 button {
   width: 100%;
-  padding: 12px;
-  background: #25D366;
-  color: white;
+  padding: 14px;
+  background: #2ecc71;
   border: none;
-  border-radius: 5px;
+  color: white;
   font-size: 16px;
+  border-radius: 6px;
+  margin-top: 15px;
+  font-weight: bold;
 }
 .result {
+  background: #eafaf1;
+  padding: 15px;
+  border-radius: 8px;
   margin-top: 15px;
-  padding: 10px;
-  background: #eaffea;
-  border-radius: 5px;
-}
-.note {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #555;
-}
-a {
-  display: block;
   text-align: center;
+}
+.whatsapp {
+  display: block;
   margin-top: 10px;
   color: #25D366;
   font-weight: bold;
+  text-decoration: none;
+}
+.disclaimer {
+  font-size: 12px;
+  color: #666;
+  margin-top: 10px;
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
 <h2>TradeOS Instant Quote</h2>
 
 <form method="POST">
 
+<label>Product Type</label>
 <select name="product" required>
   <optgroup label="Doors">
-    <option value="single_hinge">Single Hinge Door</option>
-    <option value="double_hinge">Double Hinge Door</option>
-    <option value="sliding_door">Sliding Door</option>
-    <option value="pivot_door">Pivot Door</option>
-    <option value="folding_3">Folding Stacking Door (3 Leaf)</option>
-    <option value="folding_5">Folding Stacking Door (5 Leaf)</option>
-    <option value="folding_7">Folding Stacking Door (7 Leaf)</option>
+    <option value="Single Hinge Door">Single Hinge Door</option>
+    <option value="Double Hinge Door">Double Hinge Door</option>
+    <option value="Sliding Door">Sliding Door</option>
+    <option value="Pivot Door">Pivot Door</option>
+    <option value="Folding Door (3 Leaf)">Folding Door (3 Leaf)</option>
+    <option value="Folding Door (5 Leaf)">Folding Door (5 Leaf)</option>
+    <option value="Folding Door (7 Leaf)">Folding Door (7 Leaf)</option>
   </optgroup>
 
   <optgroup label="Windows">
-    <option value="top_hung">Top Hung Window</option>
-    <option value="side_hung">Side Hung Window</option>
-    <option value="sliding_window">Sliding Window</option>
-    <option value="stacking_window">Stacking Window</option>
-    <option value="fixed">Fixed Panel / Shopfront</option>
+    <option value="Top Hung Window">Top Hung Window</option>
+    <option value="Side Hung Window">Side Hung Window</option>
+    <option value="Sliding Window">Sliding Window</option>
+    <option value="Stacking Window">Stacking Window</option>
+    <option value="Fixed Panel / Shopfront">Fixed Panel / Shopfront</option>
   </optgroup>
 </select>
 
-<select name="color" required>
-  <option value="white">White</option>
-  <option value="bronze">Bronze</option>
-  <option value="black">Black</option>
-  <option value="charcoal">Charcoal</option>
-  <option value="natural">Natural (Mill Finish)</option>
+<label>Aluminium Colour</label>
+<select name="colour" required>
+  <option value="White">White</option>
+  <option value="Bronze">Bronze</option>
+  <option value="Black">Black</option>
+  <option value="Charcoal">Charcoal</option>
+  <option value="Natural">Natural (Mill Finish)</option>
 </select>
 
-<input type="number" name="width" placeholder="Width (mm)" required>
-<input type="number" name="height" placeholder="Height (mm)" required>
+<label>Width (mm)</label>
+<input type="number" name="width" required>
+
+<label>Height (mm)</label>
+<input type="number" name="height" required>
+
+<label>Quantity</label>
 <input type="number" name="qty" value="1" required>
 
-<input type="text" name="name" placeholder="Your Name" required>
-<input type="text" name="phone" placeholder="Phone Number" required>
-<input type="text" name="area" placeholder="Your Area">
+<label>Your Name</label>
+<input name="name" required>
+
+<label>Phone Number</label>
+<input name="phone" required>
+
+<label>Your Area</label>
+<input name="area">
 
 <button type="submit">Get Estimate</button>
 </form>
 
-{% if result %}
+{% if price_low %}
 <div class="result">
-<p>{{result}}</p>
+<strong>Estimated Price Range</strong><br>
+R{{price_low}} - R{{price_high}}
 
-<div class="note">
-Please note: This is an estimated price based on the information provided. Final pricing may vary after a site inspection and detailed quotation. Prices exclude installation, delivery, and any additional hardware unless specified.
+<div class="disclaimer">
+Please note: This is an estimated price only. Final pricing may vary after a site inspection.
+Installation, delivery, and additional materials are not included.
 </div>
 
-<a href="{{whatsapp_link}}">Send on WhatsApp</a>
+<a class="whatsapp" href="{{whatsapp}}" target="_blank">
+Send via WhatsApp
+</a>
 </div>
 {% endif %}
 
@@ -128,76 +158,89 @@ Please note: This is an estimated price based on the information provided. Final
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    price_low = price_high = None
+    whatsapp = ""
+
     if request.method == "POST":
-        product = request.form["product"]
-        color = request.form["color"]
-        width = float(request.form["width"])
-        height = float(request.form["height"])
+        width = float(request.form["width"]) / 1000
+        height = float(request.form["height"]) / 1000
         qty = int(request.form["qty"])
-        name = request.form["name"]
-        phone = request.form["phone"]
-        area_loc = request.form["area"]
 
-        # Save lead
-        with open("leads.txt", "a") as f:
-            f.write(f"{name},{phone},{product},{color},{width}x{height},Qty:{qty},{area_loc}\\n")
+        area = width * height * qty
 
-        area = (width * height) / 1000000
+        product = request.form["product"]
 
-        # Pricing
-        if product == "single_hinge":
-            price_per_m2 = 3200
-        elif product == "double_hinge":
-            price_per_m2 = 4200
-        elif product == "sliding_door":
-            price_per_m2 = 3800
-        elif product == "pivot_door":
-            price_per_m2 = 6500
-        elif product == "folding_3":
-            price_per_m2 = 7500
-        elif product == "folding_5":
-            price_per_m2 = 9000
-        elif product == "folding_7":
-            price_per_m2 = 10500
-        elif product == "top_hung":
-            price_per_m2 = 1800
-        elif product == "side_hung":
-            price_per_m2 = 1800
-        elif product == "sliding_window":
-            price_per_m2 = 2200
-        elif product == "stacking_window":
-            price_per_m2 = 3000
-        elif product == "fixed":
-            price_per_m2 = 1800
+        # Pricing logic
+        if "Single Hinge" in product:
+            rate = 3200
+        elif "Double Hinge" in product:
+            rate = 4200
+        elif "Sliding Door" in product:
+            rate = 3800
+        elif "Pivot" in product:
+            rate = 6500
+        elif "3 Leaf" in product:
+            rate = 7500
+        elif "5 Leaf" in product:
+            rate = 9000
+        elif "7 Leaf" in product:
+            rate = 10500
+        elif "Sliding Window" in product:
+            rate = 2200
+        elif "Stacking Window" in product:
+            rate = 3000
+        elif "Fixed" in product:
+            rate = 1800
+        else:
+            rate = 1800
 
         # Colour adjustments
-        if color in ["black", "charcoal"]:
-            price_per_m2 += 500
-        elif color == "bronze":
-            price_per_m2 += 300
-        elif color == "natural":
-            price_per_m2 -= 100
+        colour = request.form["colour"]
+        if colour in ["Black", "Charcoal"]:
+            rate += 500
+        elif colour == "Bronze":
+            rate += 300
+        elif colour == "Natural":
+            rate -= 100
 
-        low_price = area * price_per_m2 * qty * 0.9
-        high_price = area * price_per_m2 * qty * 1.1
+        price_low = int(area * rate * 0.9)
+        price_high = int(area * rate * 1.1)
 
-        result = f"Estimated: R{int(low_price)} - R{int(high_price)}"
+        # Reference + Date + Time
+        ref = f"Q{random.randint(1000,9999)}"
+        now = datetime.now()
+        date = now.strftime("%d %B %Y")
+        time = now.strftime("%H:%M")
 
-        message = f"""Quote Request:
+        msg = f"""*TRADEOS QUOTE REQUEST*
+
+Ref: {ref}
+Date: {date}
+Time: {time}
+
+*Client Details*
+Name: {request.form['name']}
+Phone: {request.form['phone']}
+Area: {request.form['area']}
+
+*Project Details*
 Product: {product}
-Colour: {color}
-Size: {width} x {height}
-Qty: {qty}
-Area: {area_loc}
-Name: {name}
-Phone: {phone}
+Size: {request.form['width']}mm x {request.form['height']}mm
+Colour: {colour}
+Quantity: {qty}
+
+*Estimated Price Range*
+R{price_low} - R{price_high}
+
+*Important Note*
+This is a preliminary estimate based on the information provided.
+Final pricing may vary after a site inspection and detailed quotation.
+Installation, delivery, and additional materials are not included.
 """
 
-        link = "https://wa.me/27791532379?text=" + urllib.parse.quote(message)
+        whatsapp = "https://wa.me/27791532379?text=" + urllib.parse.quote(msg)
 
-        return render_template_string(HTML, result=result, whatsapp_link=link)
-
-    return render_template_string(HTML)
+    return render_template_string(HTML, price_low=price_low, price_high=price_high, whatsapp=whatsapp)
 
 
 if __name__ == "__main__":
