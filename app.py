@@ -49,6 +49,11 @@ button {
   background: #eaffea;
   border-radius: 5px;
 }
+.note {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #555;
+}
 a {
   display: block;
   text-align: center;
@@ -64,9 +69,33 @@ a {
 <h2>TradeOS Instant Quote</h2>
 
 <form method="POST">
-<select name="product">
-  <option value="window">Window</option>
-  <option value="door">Door</option>
+
+<select name="product" required>
+  <optgroup label="Doors">
+    <option value="single_hinge">Single Hinge Door</option>
+    <option value="double_hinge">Double Hinge Door</option>
+    <option value="sliding_door">Sliding Door</option>
+    <option value="pivot_door">Pivot Door</option>
+    <option value="folding_3">Folding Stacking Door (3 Leaf)</option>
+    <option value="folding_5">Folding Stacking Door (5 Leaf)</option>
+    <option value="folding_7">Folding Stacking Door (7 Leaf)</option>
+  </optgroup>
+
+  <optgroup label="Windows">
+    <option value="top_hung">Top Hung Window</option>
+    <option value="side_hung">Side Hung Window</option>
+    <option value="sliding_window">Sliding Window</option>
+    <option value="stacking_window">Stacking Window</option>
+    <option value="fixed">Fixed Panel / Shopfront</option>
+  </optgroup>
+</select>
+
+<select name="color" required>
+  <option value="white">White</option>
+  <option value="bronze">Bronze</option>
+  <option value="black">Black</option>
+  <option value="charcoal">Charcoal</option>
+  <option value="natural">Natural (Mill Finish)</option>
 </select>
 
 <input type="number" name="width" placeholder="Width (mm)" required>
@@ -83,6 +112,11 @@ a {
 {% if result %}
 <div class="result">
 <p>{{result}}</p>
+
+<div class="note">
+Please note: This is an estimated price based on the information provided. Final pricing may vary after a site inspection and detailed quotation. Prices exclude installation, delivery, and any additional hardware unless specified.
+</div>
+
 <a href="{{whatsapp_link}}">Send on WhatsApp</a>
 </div>
 {% endif %}
@@ -96,6 +130,7 @@ a {
 def home():
     if request.method == "POST":
         product = request.form["product"]
+        color = request.form["color"]
         width = float(request.form["width"])
         height = float(request.form["height"])
         qty = int(request.form["qty"])
@@ -103,29 +138,54 @@ def home():
         phone = request.form["phone"]
         area_loc = request.form["area"]
 
-        # Save lead (will improve later for cloud)
+        # Save lead
         with open("leads.txt", "a") as f:
-            f.write(f"{name},{phone},{product},{width}x{height},Qty:{qty},{area_loc}\\n")
+            f.write(f"{name},{phone},{product},{color},{width}x{height},Qty:{qty},{area_loc}\\n")
 
-        # Calculate area
         area = (width * height) / 1000000
 
         # Pricing
-        if product == "window":
-            low_rate = 1800
-            high_rate = 2500
-        else:
-            low_rate = 2500
-            high_rate = 4000
+        if product == "single_hinge":
+            price_per_m2 = 3200
+        elif product == "double_hinge":
+            price_per_m2 = 4200
+        elif product == "sliding_door":
+            price_per_m2 = 3800
+        elif product == "pivot_door":
+            price_per_m2 = 6500
+        elif product == "folding_3":
+            price_per_m2 = 7500
+        elif product == "folding_5":
+            price_per_m2 = 9000
+        elif product == "folding_7":
+            price_per_m2 = 10500
+        elif product == "top_hung":
+            price_per_m2 = 1800
+        elif product == "side_hung":
+            price_per_m2 = 1800
+        elif product == "sliding_window":
+            price_per_m2 = 2200
+        elif product == "stacking_window":
+            price_per_m2 = 3000
+        elif product == "fixed":
+            price_per_m2 = 1800
 
-        low_price = area * low_rate * qty
-        high_price = area * high_rate * qty
+        # Colour adjustments
+        if color in ["black", "charcoal"]:
+            price_per_m2 += 500
+        elif color == "bronze":
+            price_per_m2 += 300
+        elif color == "natural":
+            price_per_m2 -= 100
+
+        low_price = area * price_per_m2 * qty * 0.9
+        high_price = area * price_per_m2 * qty * 1.1
 
         result = f"Estimated: R{int(low_price)} - R{int(high_price)}"
 
-        # WhatsApp message
         message = f"""Quote Request:
 Product: {product}
+Colour: {color}
 Size: {width} x {height}
 Qty: {qty}
 Area: {area_loc}
