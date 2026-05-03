@@ -1,0 +1,5 @@
+storage/
+kali-arm64/
+*.tgz
+ngrok
+__pycache__/
