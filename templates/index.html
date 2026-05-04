@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ACD Estimator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+
+    <h2>Request a Quote</h2>
+
+    <form method="POST">
+
+        <input type="text" name="name" placeholder="Full Name" required>
+
+        <input type="text" name="phone" placeholder="Phone Number" required>
+
+        <input type="text" name="area" placeholder="Area (e.g. Sandton)" required>
+
+        <select name="job_type" required>
+            <option value="">Select Job Type</option>
+            <option>Aluminium Windows</option>
+            <option>Aluminium Doors</option>
+            <option>Frameless Shower</option>
+            <option>Glass Balustrade</option>
+            <option>Other</option>
+        </select>
+
+        <textarea name="details" placeholder="Describe the job..." required></textarea>
+
+        <button type="submit">Send via WhatsApp</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
