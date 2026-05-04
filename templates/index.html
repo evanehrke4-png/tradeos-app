@@ -4,104 +4,123 @@
     <title>ACD Estimator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
 <div class="container">
-
-    <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
-
-    <h1>ACD Estimator</h1>
-    <p class="subtitle">Aluminium & Container Dynamics (Pty) Ltd</p>
-
     <div class="card">
 
-        <form method="POST">
+        <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+
+        <h1>ACD Estimator</h1>
+        <p class="subtitle">Aluminium & Container Dynamics (Pty) Ltd</p>
+
+        <form onsubmit="sendWhatsApp(); return false;">
 
             <div id="items">
 
-                <!-- ITEM BLOCK -->
                 <div class="item">
-
-                    <!-- PRODUCT -->
                     <label>Product Type</label>
-                    <select name="product[]">
-
-                        <optgroup label="Aluminium Windows">
-                            <option>Casement Top Hung</option>
-                            <option>Casement Side Hung</option>
-                            <option>Sliding Windows</option>
-                            <option>Folding Stacking Windows</option>
-                        </optgroup>
-
+                    <select class="product">
                         <optgroup label="Aluminium Doors">
-                            <option>Pivot Doors</option>
-                            <option>Single Hinge Doors</option>
-                            <option>Double Hinge Doors</option>
-                            <option>Sliding Doors</option>
+                            <option>Pivot Door</option>
+                            <option>Single Hinge Door</option>
+                            <option>Double Hinge Door</option>
+                            <option>Sliding Door</option>
                             <option>Heavy Duty Slider</option>
                             <option>Light Duty Slider</option>
-                            <option>Folding Stacking Doors</option>
+                            <option>Folding Stacking Door</option>
                             <option>3 Leaf Folding</option>
                             <option>5 Leaf Folding</option>
                             <option>7 Leaf Folding</option>
                         </optgroup>
 
-                        <optgroup label="Fixed Panels / Shopfronts">
-                            <option>Fixed Panels / Shopfronts</option>
+                        <optgroup label="Aluminium Windows">
+                            <option>Casement Top Hung</option>
+                            <option>Casement Side Hung</option>
+                            <option>Sliding Window</option>
+                            <option>Folding Stacking Window</option>
                         </optgroup>
 
+                        <optgroup label="Other">
+                            <option>Fixed Panel / Shopfront</option>
+                        </optgroup>
                     </select>
 
-                    <!-- COLOUR -->
-                    <label>Aluminium Extrusion Colours</label>
-                    <select name="colour[]">
-                        <option>Natural</option>
+                    <label>Aluminium Colour</label>
+                    <select class="colour">
                         <option>White</option>
                         <option>Black</option>
                         <option>Charcoal</option>
                         <option>Bronze</option>
+                        <option>Natural</option>
                     </select>
 
-                    <!-- DIMENSIONS -->
                     <label>Width (mm)</label>
-                    <input type="number" name="width[]">
+                    <input type="number" class="width">
 
                     <label>Height (mm)</label>
-                    <input type="number" name="height[]">
+                    <input type="number" class="height">
 
                     <label>Quantity</label>
-                    <input type="number" name="qty[]" value="1">
-
+                    <input type="number" class="qty" value="1">
                 </div>
 
             </div>
 
             <button type="button" class="add-btn" onclick="addItem()">+ Add Another Item</button>
 
-            <!-- CUSTOMER -->
             <label>Your Name</label>
-            <input type="text" name="name">
+            <input type="text" id="name">
 
             <label>Phone Number</label>
-            <input type="text" name="phone">
+            <input type="text" id="phone">
 
             <label>Your Area</label>
-            <input type="text" name="area">
+            <input type="text" id="area">
 
             <button type="submit" class="main-btn">Get Estimate</button>
 
         </form>
 
     </div>
-
 </div>
 
 <script>
 function addItem() {
-    let item = document.querySelector('.item');
-    let clone = item.cloneNode(true);
-    document.getElementById('items').appendChild(clone);
+    let item = document.querySelector(".item").cloneNode(true);
+    document.getElementById("items").appendChild(item);
+}
+
+function sendWhatsApp() {
+
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let area = document.getElementById("area").value;
+
+    let message = "NEW QUOTATION REQUEST%0A%0A";
+
+    message += "Name: " + name + "%0A";
+    message += "Phone: " + phone + "%0A";
+    message += "Area: " + area + "%0A%0A";
+
+    let items = document.querySelectorAll(".item");
+
+    items.forEach((item, index) => {
+        let product = item.querySelector(".product").value;
+        let colour = item.querySelector(".colour").value;
+        let width = item.querySelector(".width").value;
+        let height = item.querySelector(".height").value;
+        let qty = item.querySelector(".qty").value;
+
+        message += "Item " + (index + 1) + "%0A";
+        message += "Product: " + product + "%0A";
+        message += "Colour: " + colour + "%0A";
+        message += "Size: " + width + " x " + height + "%0A";
+        message += "Qty: " + qty + "%0A%0A";
+    });
+
+    let url = "https://wa.me/27791532379?text=" + message;
+    window.open(url, "_blank");
 }
 </script>
 
