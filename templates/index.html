@@ -9,45 +9,102 @@
 
 <div class="container">
 
-    <!-- BIG LOGO -->
     <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
 
-    <!-- TITLES -->
-    <h1 class="title">ACD Estimator</h1>
+    <h1>ACD Estimator</h1>
     <p class="subtitle">Aluminium & Container Dynamics (Pty) Ltd</p>
 
-    <!-- FORM -->
-    <form method="POST">
+    <div class="card">
 
-        <input type="text" name="name" placeholder="Full Name" required>
-        <input type="text" name="phone" placeholder="Phone Number" required>
-        <input type="text" name="area" placeholder="Area" required>
+        <form method="POST" id="form">
 
-        <select name="product" required>
-            <option value="">Select Product</option>
-            <option>Aluminium Window</option>
-            <option>Aluminium Door</option>
-            <option>Sliding Door</option>
-            <option>Stacking Door</option>
-        </select>
+            <div id="items">
 
-        <select name="colour" required>
-            <option value="">Select Colour</option>
-            <option>Black</option>
-            <option>White</option>
-            <option>Bronze</option>
-            <option>Charcoal</option>
-        </select>
+                <!-- ITEM -->
+                <div class="item">
 
-        <input type="number" name="width" placeholder="Width (mm)" required>
-        <input type="number" name="height" placeholder="Height (mm)" required>
-        <input type="number" name="qty" placeholder="Quantity" required>
+                    <div class="row">
+                        <div class="field">
+                            <label>Product</label>
+                            <select name="product[]">
+                                <optgroup label="Doors">
+                                    <option>Folding Stacking Door</option>
+                                    <option>Hinge Door</option>
+                                    <option>Pivot Door</option>
+                                    <option>Sliding Door</option>
+                                    <option>Heavy Duty Slider</option>
+                                    <option>Light Duty Slider</option>
+                                </optgroup>
 
-        <button type="submit">Get Estimate</button>
+                                <optgroup label="Windows">
+                                    <option>Top Hung Window</option>
+                                    <option>Side Hung Window</option>
+                                </optgroup>
+                            </select>
+                        </div>
 
-    </form>
+                        <div class="field">
+                            <label>Colour</label>
+                            <select name="colour[]">
+                                <option>White</option>
+                                <option>Black</option>
+                                <option>Charcoal</option>
+                                <option>Bronze</option>
+                                <option>Natural</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="field">
+                            <label>Width (mm)</label>
+                            <input type="number" name="width[]">
+                        </div>
+
+                        <div class="field">
+                            <label>Height (mm)</label>
+                            <input type="number" name="height[]">
+                        </div>
+
+                        <div class="field">
+                            <label>Qty</label>
+                            <input type="number" name="qty[]" value="1">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button type="button" class="add-btn" onclick="addItem()">+ Add Another Item</button>
+
+            <div class="row">
+                <div class="field">
+                    <label>Your Name</label>
+                    <input type="text" name="name">
+                </div>
+
+                <div class="field">
+                    <label>Phone</label>
+                    <input type="text" name="phone">
+                </div>
+            </div>
+
+            <button type="submit" class="main-btn">Get Full Estimate</button>
+
+        </form>
+
+    </div>
 
 </div>
+
+<script>
+function addItem() {
+    const item = document.querySelector('.item');
+    const clone = item.cloneNode(true);
+    document.getElementById('items').appendChild(clone);
+}
+</script>
 
 </body>
 </html>
