@@ -1,18 +1,21 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f4f6f8;
     margin: 0;
+    background: #f4f6f8;
 }
 
+/* FULL WIDTH */
 .container {
-    max-width: 650px;
+    width: 100%;
+    max-width: 900px;
     margin: auto;
     padding: 20px;
     text-align: center;
 }
 
+/* LOGO */
 .logo {
-    width: 260px;
+    width: 300px;
     margin-bottom: 10px;
 }
 
@@ -21,50 +24,46 @@ body {
     margin-bottom: 20px;
 }
 
+/* CARD */
 .card {
     background: white;
-    padding: 20px;
+    padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.field {
-    flex: 1;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     text-align: left;
 }
 
+/* INPUTS */
 label {
-    font-size: 13px;
-    margin-bottom: 5px;
+    font-weight: bold;
     display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
 
 input, select {
     width: 100%;
-    padding: 10px;
-    border-radius: 6px;
+    padding: 14px;
+    border-radius: 8px;
     border: 1px solid #ccc;
+    font-size: 14px;
 }
 
+/* BUTTONS */
 .add-btn {
     width: 100%;
-    padding: 12px;
+    margin-top: 20px;
+    padding: 14px;
     background: #2d6a8d;
     color: white;
     border: none;
     border-radius: 8px;
-    margin-bottom: 15px;
 }
 
 .main-btn {
     width: 100%;
-    padding: 14px;
+    margin-top: 20px;
+    padding: 16px;
     background: #2ecc71;
     color: white;
     border: none;
