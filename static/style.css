@@ -70,3 +70,26 @@ input, select {
     border-radius: 8px;
     font-size: 16px;
 }
+
+.item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.item label {
+    margin-top: 10px;
+}
+
+.item input,
+.item select {
+    width: 100%;
+}
+
+/* Make full-width fields */
+.item label:nth-child(1),
+.item select:nth-child(2),
+.item label:nth-child(3),
+.item select:nth-child(4) {
+    grid-column: span 2;
+}
