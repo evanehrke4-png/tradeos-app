@@ -16,61 +16,62 @@
 
     <div class="card">
 
-        <form method="POST" id="form">
+        <form method="POST">
 
             <div id="items">
 
-                <!-- ITEM -->
+                <!-- ITEM BLOCK -->
                 <div class="item">
 
-                    <div class="row">
-                        <div class="field">
-                            <label>Product</label>
-                            <select name="product[]">
-                                <optgroup label="Doors">
-                                    <option>Folding Stacking Door</option>
-                                    <option>Hinge Door</option>
-                                    <option>Pivot Door</option>
-                                    <option>Sliding Door</option>
-                                    <option>Heavy Duty Slider</option>
-                                    <option>Light Duty Slider</option>
-                                </optgroup>
+                    <!-- PRODUCT -->
+                    <label>Product Type</label>
+                    <select name="product[]">
 
-                                <optgroup label="Windows">
-                                    <option>Top Hung Window</option>
-                                    <option>Side Hung Window</option>
-                                </optgroup>
-                            </select>
-                        </div>
+                        <optgroup label="Aluminium Windows">
+                            <option>Casement Top Hung</option>
+                            <option>Casement Side Hung</option>
+                            <option>Sliding Windows</option>
+                            <option>Folding Stacking Windows</option>
+                        </optgroup>
 
-                        <div class="field">
-                            <label>Colour</label>
-                            <select name="colour[]">
-                                <option>White</option>
-                                <option>Black</option>
-                                <option>Charcoal</option>
-                                <option>Bronze</option>
-                                <option>Natural</option>
-                            </select>
-                        </div>
-                    </div>
+                        <optgroup label="Aluminium Doors">
+                            <option>Pivot Doors</option>
+                            <option>Single Hinge Doors</option>
+                            <option>Double Hinge Doors</option>
+                            <option>Sliding Doors</option>
+                            <option>Heavy Duty Slider</option>
+                            <option>Light Duty Slider</option>
+                            <option>Folding Stacking Doors</option>
+                            <option>3 Leaf Folding</option>
+                            <option>5 Leaf Folding</option>
+                            <option>7 Leaf Folding</option>
+                        </optgroup>
 
-                    <div class="row">
-                        <div class="field">
-                            <label>Width (mm)</label>
-                            <input type="number" name="width[]">
-                        </div>
+                        <optgroup label="Fixed Panels / Shopfronts">
+                            <option>Fixed Panels / Shopfronts</option>
+                        </optgroup>
 
-                        <div class="field">
-                            <label>Height (mm)</label>
-                            <input type="number" name="height[]">
-                        </div>
+                    </select>
 
-                        <div class="field">
-                            <label>Qty</label>
-                            <input type="number" name="qty[]" value="1">
-                        </div>
-                    </div>
+                    <!-- COLOUR -->
+                    <label>Aluminium Extrusion Colours</label>
+                    <select name="colour[]">
+                        <option>Natural</option>
+                        <option>White</option>
+                        <option>Black</option>
+                        <option>Charcoal</option>
+                        <option>Bronze</option>
+                    </select>
+
+                    <!-- DIMENSIONS -->
+                    <label>Width (mm)</label>
+                    <input type="number" name="width[]">
+
+                    <label>Height (mm)</label>
+                    <input type="number" name="height[]">
+
+                    <label>Quantity</label>
+                    <input type="number" name="qty[]" value="1">
 
                 </div>
 
@@ -78,19 +79,17 @@
 
             <button type="button" class="add-btn" onclick="addItem()">+ Add Another Item</button>
 
-            <div class="row">
-                <div class="field">
-                    <label>Your Name</label>
-                    <input type="text" name="name">
-                </div>
+            <!-- CUSTOMER -->
+            <label>Your Name</label>
+            <input type="text" name="name">
 
-                <div class="field">
-                    <label>Phone</label>
-                    <input type="text" name="phone">
-                </div>
-            </div>
+            <label>Phone Number</label>
+            <input type="text" name="phone">
 
-            <button type="submit" class="main-btn">Get Full Estimate</button>
+            <label>Your Area</label>
+            <input type="text" name="area">
+
+            <button type="submit" class="main-btn">Get Estimate</button>
 
         </form>
 
@@ -100,8 +99,8 @@
 
 <script>
 function addItem() {
-    const item = document.querySelector('.item');
-    const clone = item.cloneNode(true);
+    let item = document.querySelector('.item');
+    let clone = item.cloneNode(true);
     document.getElementById('items').appendChild(clone);
 }
 </script>
