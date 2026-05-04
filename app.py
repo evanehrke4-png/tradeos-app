@@ -5,6 +5,35 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+# =========================
+# 🔥 PRICING CONTROL PANEL
+# =========================
+PRICES = {
+    "Single Hinge Door": 3200,
+    "Double Hinge Door": 4200,
+    "Sliding Door": 3800,
+    "Pivot Door": 6500,
+    "Folding Door (3 Leaf)": 7500,
+    "Folding Door (5 Leaf)": 9000,
+    "Folding Door (7 Leaf)": 10500,
+    "Top Hung Window": 1800,
+    "Side Hung Window": 1800,
+    "Sliding Window": 2200,
+    "Stacking Window": 3000,
+    "Fixed Panel / Shopfront": 1800
+}
+
+COLOUR_EXTRA = {
+    "White": 0,
+    "Black": 500,
+    "Charcoal": 500,
+    "Bronze": 300,
+    "Natural": -100
+}
+
+# =========================
+# REF SYSTEM
+# =========================
 def generate_ref():
     file = "ref.txt"
     if not os.path.exists(file):
@@ -17,87 +46,45 @@ def generate_ref():
     with open(file, "w") as f:
         f.write(str(number + 1))
 
-    return f"ACD-Q-{datetime.now().year}-{str(number).zfill(4)}
+    return f"ACD-Q-{datetime.now().year}-{str(number).zfill(4)}"
 
+# =========================
+# SAVE LEADS
+# =========================
 def save_lead(data):
     with open("leads.txt", "a") as f:
         f.write(data + "\n" + "-"*50 + "\n")
 
+# =========================
+# HTML
+# =========================
 HTML = """
 <!DOCTYPE html>
 <html>
 <head>
 <title>ACD Estimator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-body {
-  font-family: Arial;
-  background: #f4f6f8;
-  margin: 0;
-}
-.container {
-  max-width: 420px;
-  margin: 30px auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-}
-h2 {
-  text-align: center;
-}
-label {
-  display: block;
-  font-weight: bold;
-  margin-top: 10px;
-}
-select, input {
-  width: 100%;
-  padding: 12px;
-  margin-top: 5px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-}
-.add-btn {
-  background: #2980b9;
-  color: white;
-}
-.submit-btn {
-  background: #27ae60;
-  color: white;
-}
-.item {
-  border: 1px solid #ddd;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 8px;
-}
-.result {
-  background: #eafaf1;
-  padding: 15px;
-  margin-top: 15px;
-  border-radius: 8px;
-  text-align: center;
-}
+body { font-family: Arial; background: #f4f6f8; }
+.container { max-width: 420px; margin: 30px auto; background: white; padding: 20px; border-radius: 10px; }
+h2 { text-align: center; }
+label { font-weight: bold; display:block; margin-top:10px; }
+input, select { width:100%; padding:12px; margin-top:5px; border-radius:6px; border:1px solid #ccc; }
+button { width:100%; padding:14px; margin-top:15px; border:none; border-radius:6px; font-weight:bold; }
+.add-btn { background:#2980b9; color:white; }
+.submit-btn { background:#27ae60; color:white; }
+.item { border:1px solid #ddd; padding:12px; margin-top:10px; border-radius:8px; }
+.result { background:#eafaf1; padding:15px; margin-top:15px; border-radius:8px; text-align:center; }
 </style>
 
 <script>
-function addItem() {
+function addItem(){
   let container = document.getElementById("items");
-
   let block = document.createElement("div");
   block.className = "item";
 
   block.innerHTML = `
-    <label>Product Type</label>
+    <label>Product</label>
     <select name="product">
       <option>Single Hinge Door</option>
       <option>Double Hinge Door</option>
@@ -113,12 +100,12 @@ function addItem() {
       <option>Fixed Panel / Shopfront</option>
     </select>
 
-    <label>Aluminium Colour</label>
+    <label>Colour</label>
     <select name="colour">
       <option>White</option>
-      <option>Bronze</option>
       <option>Black</option>
       <option>Charcoal</option>
+      <option>Bronze</option>
       <option>Natural</option>
     </select>
 
@@ -128,17 +115,16 @@ function addItem() {
     <label>Height (mm)</label>
     <input type="number" name="height" required>
 
-    <label>Quantity</label>
+    <label>Qty</label>
     <input type="number" name="qty" value="1" required>
   `;
 
   container.appendChild(block);
 }
 </script>
-
 </head>
-<body>
 
+<body>
 <div class="container">
 <h2>ACD Estimator</h2>
 
@@ -147,7 +133,7 @@ function addItem() {
 <div id="items">
 <div class="item">
 
-<label>Product Type</label>
+<label>Product</label>
 <select name="product">
   <option>Single Hinge Door</option>
   <option>Double Hinge Door</option>
@@ -163,36 +149,36 @@ function addItem() {
   <option>Fixed Panel / Shopfront</option>
 </select>
 
-<label>Aluminium Colour</label>
+<label>Colour</label>
 <select name="colour">
   <option>White</option>
-  <option>Bronze</option>
   <option>Black</option>
   <option>Charcoal</option>
+  <option>Bronze</option>
   <option>Natural</option>
 </select>
 
-<label>Width (mm)</label>
-<input type="number" name="width" required>
+<label>Width</label>
+<input name="width" type="number" required>
 
-<label>Height (mm)</label>
-<input type="number" name="height" required>
+<label>Height</label>
+<input name="height" type="number" required>
 
-<label>Quantity</label>
-<input type="number" name="qty" value="1" required>
+<label>Qty</label>
+<input name="qty" type="number" value="1" required>
 
 </div>
 </div>
 
 <button type="button" class="add-btn" onclick="addItem()">+ Add Another Item</button>
 
-<label>Your Name</label>
+<label>Name</label>
 <input name="name" required>
 
-<label>Phone Number</label>
+<label>Phone</label>
 <input name="phone" required>
 
-<label>Your Area</label>
+<label>Area</label>
 <input name="area">
 
 <button type="submit" class="submit-btn">Get Estimate</button>
@@ -201,11 +187,7 @@ function addItem() {
 
 {% if total_low %}
 <div class="result">
-<strong>Estimated Price Range</strong><br>
-R{{total_low}} - R{{total_high}}
-
-<br><br>
-
+<strong>R{{total_low}} - R{{total_high}}</strong><br><br>
 <a href="{{whatsapp}}" target="_blank">Send via WhatsApp</a>
 </div>
 {% endif %}
@@ -217,11 +199,11 @@ R{{total_low}} - R{{total_high}}
 
 @app.route("/", methods=["GET","POST"])
 def home():
-    total_low = total_high = 0
+    total_low = 0
+    total_high = 0
     whatsapp = ""
 
     if request.method == "POST":
-
         products = request.form.getlist("product")
         widths = request.form.getlist("width")
         heights = request.form.getlist("height")
@@ -229,48 +211,19 @@ def home():
         colours = request.form.getlist("colour")
 
         ref = generate_ref()
-        now = datetime.now()
-        date = now.strftime("%d %B %Y")
-        time = now.strftime("%H:%M")
-
         items_text = ""
 
         for i in range(len(products)):
+            product = products[i]
             width = float(widths[i]) / 1000
             height = float(heights[i]) / 1000
             qty = int(qtys[i])
-            product = products[i]
             colour = colours[i]
 
             area = width * height * qty
 
-            if "Single Hinge" in product:
-                rate = 3200
-            elif "Double Hinge" in product:
-                rate = 4200
-            elif "Sliding Door" in product:
-                rate = 3800
-            elif "Pivot" in product:
-                rate = 6500
-            elif "3 Leaf" in product:
-                rate = 7500
-            elif "5 Leaf" in product:
-                rate = 9000
-            elif "7 Leaf" in product:
-                rate = 10500
-            elif "Sliding Window" in product:
-                rate = 2200
-            elif "Stacking Window" in product:
-                rate = 3000
-            else:
-                rate = 1800
-
-            if colour in ["Black", "Charcoal"]:
-                rate += 500
-            elif colour == "Bronze":
-                rate += 300
-            elif colour == "Natural":
-                rate -= 100
+            rate = PRICES.get(product, 2000)
+            rate += COLOUR_EXTRA.get(colour, 0)
 
             low = int(area * rate * 0.9)
             high = int(area * rate * 1.1)
@@ -280,24 +233,7 @@ def home():
 
             items_text += f"{product} ({colour}) - R{low} to R{high}\\n"
 
-        msg = f"""*ACD ESTIMATOR REQUEST*
-
-REF: {ref}
-DATE: {date}
-TIME: {time}
-
-*Client Details*
-Name: {request.form['name']}
-Phone: {request.form['phone']}
-Area: {request.form['area']}
-
-*Items*
-{items_text}
-
-*TOTAL*
-R{total_low} - R{total_high}
-"""
-
+        msg = f"ACD QUOTE\\nREF: {ref}\\n\\n{items_text}\\nTOTAL: R{total_low} - R{total_high}"
         whatsapp = "https://wa.me/27791532379?text=" + urllib.parse.quote(msg)
 
         save_lead(msg)
