@@ -2,126 +2,125 @@
 <html>
 <head>
     <title>ACD Estimator</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        input, select, button { padding: 8px; margin: 5px; width: 200px; }
+        .result { margin-top: 20px; padding: 15px; border: 1px solid #ccc; }
+    </style>
 </head>
+
 <body>
 
-<div class="container">
-    <div class="card">
+<h2>ACD Aluminium & Glass Estimator</h2>
 
-        <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+<label>Product:</label><br>
+<select id="product">
+    <option value="single">Single Hinge Door</option>
+    <option value="double">Double Hinge Door</option>
+    <option value="pivot">Pivot Door</option>
+    <option value="fold3">Folding Door (3 Leaf)</option>
+    <option value="fold5">Folding Door (5 Leaf)</option>
+    <option value="fold7">Folding Door (7 Leaf)</option>
+    <option value="sliderHeavy">Sliding Door (Heavy Duty)</option>
+    <option value="sliderLight">Sliding Door (Light Duty)</option>
+    <option value="topHung">Top Hung Window</option>
+    <option value="sideHung">Side Hung Window</option>
+    <option value="slidingWindow">Sliding Window</option>
+    <option value="foldWindow">Folding Window</option>
+    <option value="fixed">Fixed Panel / Shopfront</option>
+</select><br>
 
-        <h1>ACD Estimator</h1>
-        <p class="subtitle">Aluminium & Container Dynamics (Pty) Ltd</p>
+<label>Width (meters):</label><br>
+<input type="number" id="width" step="0.01"><br>
 
-        <form onsubmit="sendWhatsApp(); return false;">
+<label>Height (meters):</label><br>
+<input type="number" id="height" step="0.01"><br>
 
-            <div id="items">
+<label>Colour:</label><br>
+<select id="colour">
+    <option value="Bronze">Bronze</option>
+    <option value="Black">Black</option>
+    <option value="Charcoal">Charcoal</option>
+    <option value="White">White</option>
+    <option value="Natural">Natural</option>
+</select><br>
 
-                <div class="item">
-                    <label>Product Type</label>
-                    <select class="product">
-                        <optgroup label="Aluminium Doors">
-                            <option>Pivot Door</option>
-                            <option>Single Hinge Door</option>
-                            <option>Double Hinge Door</option>
-                            <option>Sliding Door</option>
-                            <option>Heavy Duty Slider</option>
-                            <option>Light Duty Slider</option>
-                            <option>Folding Stacking Door</option>
-                            <option>3 Leaf Folding</option>
-                            <option>5 Leaf Folding</option>
-                            <option>7 Leaf Folding</option>
-                        </optgroup>
+<button onclick="calculate()">Get Estimate</button>
 
-                        <optgroup label="Aluminium Windows">
-                            <option>Casement Top Hung</option>
-                            <option>Casement Side Hung</option>
-                            <option>Sliding Window</option>
-                            <option>Folding Stacking Window</option>
-                        </optgroup>
-
-                        <optgroup label="Other">
-                            <option>Fixed Panel / Shopfront</option>
-                        </optgroup>
-                    </select>
-
-                    <label>Aluminium Colour</label>
-                    <select class="colour">
-                        <option>White</option>
-                        <option>Black</option>
-                        <option>Charcoal</option>
-                        <option>Bronze</option>
-                        <option>Natural</option>
-                    </select>
-
-                    <label>Width (mm)</label>
-                    <input type="number" class="width">
-
-                    <label>Height (mm)</label>
-                    <input type="number" class="height">
-
-                    <label>Quantity</label>
-                    <input type="number" class="qty" value="1">
-                </div>
-
-            </div>
-
-            <button type="button" class="add-btn" onclick="addItem()">+ Add Another Item</button>
-
-            <label>Your Name</label>
-            <input type="text" id="name">
-
-            <label>Phone Number</label>
-            <input type="text" id="phone">
-
-            <label>Your Area</label>
-            <input type="text" id="area">
-
-            <button type="submit" class="main-btn">Get Estimate</button>
-
-        </form>
-
-    </div>
-</div>
+<div class="result" id="result"></div>
 
 <script>
-function addItem() {
-    let item = document.querySelector(".item").cloneNode(true);
-    document.getElementById("items").appendChild(item);
+
+const pricing = {
+    single: [3200, 4200],
+    double: [3600, 4000],
+    pivot: [3400, 4200],
+    fold3: [2800, 3600],
+    fold5: [2800, 3800],
+    fold7: [2900, 3900],
+    sliderHeavy: [2800, 3800],
+    sliderLight: [2200, 3000],
+    topHung: [1400, 3000],
+    sideHung: [1800, 2600],
+    slidingWindow: [1700, 2600],
+    foldWindow: [3000, 4500],
+    fixed: [3000, 4500]
+};
+
+const productNames = {
+    single: "Single Hinge Door",
+    double: "Double Hinge Door",
+    pivot: "Pivot Door",
+    fold3: "Folding Door (3 Leaf)",
+    fold5: "Folding Door (5 Leaf)",
+    fold7: "Folding Door (7 Leaf)",
+    sliderHeavy: "Sliding Door (Heavy Duty)",
+    sliderLight: "Sliding Door (Light Duty)",
+    topHung: "Top Hung Window",
+    sideHung: "Side Hung Window",
+    slidingWindow: "Sliding Window",
+    foldWindow: "Folding Window",
+    fixed: "Fixed Panel / Shopfront"
+};
+
+function calculate() {
+    let product = document.getElementById("product").value;
+    let width = parseFloat(document.getElementById("width").value);
+    let height = parseFloat(document.getElementById("height").value);
+    let colour = document.getElementById("colour").value;
+
+    if (!width || !height) {
+        alert("Please enter width and height");
+        return;
+    }
+
+    let sqm = width * height;
+
+    let minRate = pricing[product][0];
+    let maxRate = pricing[product][1];
+
+    let minPrice = sqm * minRate;
+    let maxPrice = sqm * maxRate;
+
+    // Apply Natural colour increase
+    if (colour.toLowerCase() === "natural") {
+        minPrice *= 1.15;
+        maxPrice *= 1.15;
+    }
+
+    document.getElementById("result").innerHTML = `
+        <h3>Estimate</h3>
+        <p><strong>Product:</strong> ${productNames[product]}</p>
+        <p><strong>Size:</strong> ${width}m × ${height}m</p>
+        <p><strong>Area:</strong> ${sqm.toFixed(2)} m²</p>
+        <p><strong>Colour:</strong> ${colour}</p>
+        <hr>
+        <p><strong>Estimated Price Range:</strong></p>
+        <p>R ${minPrice.toFixed(2)} - R ${maxPrice.toFixed(2)}</p>
+        <small>Includes installation & standard hardware. Excludes VAT.</small>
+    `;
 }
 
-function sendWhatsApp() {
-
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
-    let area = document.getElementById("area").value;
-
-    let message = "NEW QUOTATION REQUEST%0A%0A";
-
-    message += "Name: " + name + "%0A";
-    message += "Phone: " + phone + "%0A";
-    message += "Area: " + area + "%0A%0A";
-
-    let items = document.querySelectorAll(".item");
-
-    items.forEach((item, index) => {
-        let product = item.querySelector(".product").value;
-        let colour = item.querySelector(".colour").value;
-        let width = item.querySelector(".width").value;
-        let height = item.querySelector(".height").value;
-        let qty = item.querySelector(".qty").value;
-
-        message += "Item " + (index + 1) + "%0A";
-        message += "Product: " + product + "%0A";
-        message += "Colour: " + colour + "%0A";
-        message += "Size: " + width + " x " + height + "%0A";
-        message += "Qty: " + qty + "%0A%0A";
-    });
-
-    let url = "https://wa.me/27791532379?text=" + message;
-    window.open(url, "_blank");
-}
 </script>
 
 </body>
