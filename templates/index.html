@@ -2,52 +2,100 @@
 <html>
 <head>
     <title>ACD Estimator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
-        body { font-family: Arial; padding: 20px; }
-        input, select, button { padding: 8px; margin: 5px; width: 200px; }
-        .result { margin-top: 20px; padding: 15px; border: 1px solid #ccc; }
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        img {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin: 10px 0;
+        }
+
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: black;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
 <body>
 
-<h2>ACD Aluminium & Glass Estimator</h2>
+<div class="container">
 
-<label>Product:</label><br>
-<select id="product">
-    <option value="single">Single Hinge Door</option>
-    <option value="double">Double Hinge Door</option>
-    <option value="pivot">Pivot Door</option>
-    <option value="fold3">Folding Door (3 Leaf)</option>
-    <option value="fold5">Folding Door (5 Leaf)</option>
-    <option value="fold7">Folding Door (7 Leaf)</option>
-    <option value="sliderHeavy">Sliding Door (Heavy Duty)</option>
-    <option value="sliderLight">Sliding Door (Light Duty)</option>
-    <option value="topHung">Top Hung Window</option>
-    <option value="sideHung">Side Hung Window</option>
-    <option value="slidingWindow">Sliding Window</option>
-    <option value="foldWindow">Folding Window</option>
-    <option value="fixed">Fixed Panel / Shopfront</option>
-</select><br>
+    <!-- LOGO -->
+    <img src="logo.png" alt="ACD Logo">
 
-<label>Width (meters):</label><br>
-<input type="number" id="width" step="0.01"><br>
+    <h2>ACD Aluminium & Glass Estimator</h2>
 
-<label>Height (meters):</label><br>
-<input type="number" id="height" step="0.01"><br>
+    <select id="product">
+        <option value="single">Single Hinge Door</option>
+        <option value="double">Double Hinge Door</option>
+        <option value="pivot">Pivot Door</option>
+        <option value="fold3">Folding Door (3 Leaf)</option>
+        <option value="fold5">Folding Door (5 Leaf)</option>
+        <option value="fold7">Folding Door (7 Leaf)</option>
+        <option value="sliderHeavy">Sliding Door (Heavy Duty)</option>
+        <option value="sliderLight">Sliding Door (Light Duty)</option>
+        <option value="topHung">Top Hung Window</option>
+        <option value="sideHung">Side Hung Window</option>
+        <option value="slidingWindow">Sliding Window</option>
+        <option value="foldWindow">Folding Window</option>
+        <option value="fixed">Fixed Panel / Shopfront</option>
+    </select>
 
-<label>Colour:</label><br>
-<select id="colour">
-    <option value="Bronze">Bronze</option>
-    <option value="Black">Black</option>
-    <option value="Charcoal">Charcoal</option>
-    <option value="White">White</option>
-    <option value="Natural">Natural</option>
-</select><br>
+    <input type="number" id="width" placeholder="Width (meters)" step="0.01">
+    <input type="number" id="height" placeholder="Height (meters)" step="0.01">
 
-<button onclick="calculate()">Get Estimate</button>
+    <select id="colour">
+        <option value="Bronze">Bronze</option>
+        <option value="Black">Black</option>
+        <option value="Charcoal">Charcoal</option>
+        <option value="White">White</option>
+        <option value="Natural">Natural (+15%)</option>
+    </select>
 
-<div class="result" id="result"></div>
+    <button onclick="calculate()">Get Estimate</button>
+
+    <div class="result" id="result"></div>
+
+</div>
 
 <script>
 
@@ -90,7 +138,7 @@ function calculate() {
     let colour = document.getElementById("colour").value;
 
     if (!width || !height) {
-        alert("Please enter width and height");
+        alert("Enter width and height");
         return;
     }
 
@@ -102,22 +150,22 @@ function calculate() {
     let minPrice = sqm * minRate;
     let maxPrice = sqm * maxRate;
 
-    // Apply Natural colour increase
+    // Natural colour increase
     if (colour.toLowerCase() === "natural") {
         minPrice *= 1.15;
         maxPrice *= 1.15;
     }
 
     document.getElementById("result").innerHTML = `
-        <h3>Estimate</h3>
-        <p><strong>Product:</strong> ${productNames[product]}</p>
-        <p><strong>Size:</strong> ${width}m × ${height}m</p>
-        <p><strong>Area:</strong> ${sqm.toFixed(2)} m²</p>
-        <p><strong>Colour:</strong> ${colour}</p>
-        <hr>
-        <p><strong>Estimated Price Range:</strong></p>
-        <p>R ${minPrice.toFixed(2)} - R ${maxPrice.toFixed(2)}</p>
-        <small>Includes installation & standard hardware. Excludes VAT.</small>
+        <strong>${productNames[product]}</strong><br><br>
+        Size: ${width}m × ${height}m<br>
+        Area: ${sqm.toFixed(2)} m²<br>
+        Colour: ${colour}<br><br>
+
+        <strong>Estimate:</strong><br>
+        R ${minPrice.toFixed(0)} - R ${maxPrice.toFixed(0)}<br><br>
+
+        <small>Includes installation & hardware. Excludes VAT.</small>
     `;
 }
 
