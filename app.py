@@ -26,8 +26,7 @@ def save_lead(data):
     with open("leads.txt", "a") as f:
         f.write(data + "\n" + "-"*40 + "\n")
 
-HTML = """
-<!DOCTYPE html>
+HTML = """<!DOCTYPE html>
 <html>
 <head>
 <title>ACD Estimator</title>
@@ -77,7 +76,8 @@ function addItem() {
 <select name="product">
   <option>Single Hinge Door</option>
   <option>Double Hinge Door</option>
-  <option>Sliding Door</option>
+  <option>Sliding Door (Heavy Duty)</option>
+  <option>Sliding Door (Light Duty)</option>
   <option>Pivot Door</option>
   <option>Folding Door (3 Leaf)</option>
   <option>Folding Door (5 Leaf)</option>
@@ -150,6 +150,10 @@ R{{price_low}} - R{{price_high}}
 Send via WhatsApp
 </a>
 
+<a class="whatsapp" href="{{whatsapp_visit}}" target="_blank">
+📅 Book Site Visit
+</a>
+
 </div>
 {% endif %}
 
@@ -164,6 +168,7 @@ Send via WhatsApp
 def home():
     price_low = price_high = 0
     whatsapp = ""
+    whatsapp_visit = ""
     breakdown_html = ""
 
     if request.method == "POST":
@@ -176,13 +181,14 @@ def home():
 
         pricing = {
             "Single Hinge Door": (3200, 4200),
-            "Double Hinge Door": (3600, 4000),
-            "Sliding Door": (2800, 3800),
-            "Pivot Door": (3400, 4200),
+            "Double Hinge Door": (2600, 4000),
+            "Sliding Door (Heavy Duty)": (2800, 3800),
+            "Sliding Door (Light Duty)": (2200, 3000),
+            "Pivot Door": (4000, 4600),
             "Folding Door (3 Leaf)": (2800, 3600),
             "Folding Door (5 Leaf)": (2800, 3800),
             "Folding Door (7 Leaf)": (2900, 3900),
-            "Top Hung Window": (1400, 3000),
+            "Top Hung Window": (1600, 3000),
             "Side Hung Window": (1800, 2600),
             "Sliding Window": (1700, 2600),
             "Stacking Window": (3000, 4500),
@@ -213,8 +219,11 @@ def home():
                 low_i = int(low)
                 high_i = int(high)
 
-                details += f"{products[i]} ({w}x{h}m x{q}) → R{low_i} - R{high_i}\\n"
-                breakdown_html += f"<div><strong>{products[i]}</strong><br>R{low_i} - R{high_i}</div><br>"
+                details += f"""• {products[i]} ({w:.2f}m × {h:.2f}m) x{q}
+  R{low_i:,} – R{high_i:,}
+
+"""
+                breakdown_html += f"<div><strong>{products[i]}</strong><br>R{low_i:,} - R{high_i:,}</div><br>"
 
         price_low = int(price_low)
         price_high = int(price_high)
@@ -223,24 +232,38 @@ def home():
 
         msg = f"""*ACD ESTIMATOR REQUEST*
 
-REF: {ref}
+Ref: {ref}
+
+*Client Details*
+Name: {request.form['name']}
+Phone: {request.form['phone']}
+Area: {request.form['area']}
+
+*Project Items*
+{details}
+*Total Estimate*
+R{price_low:,} – R{price_high:,}
+"""
+
+        visit_msg = f"""*SITE VISIT REQUEST*
+
+Hi, I would like to book a site visit.
+
+Ref: {ref}
 
 Name: {request.form['name']}
 Phone: {request.form['phone']}
 Area: {request.form['area']}
 
-Items:
-{details}
-
-Total Estimate:
-R{price_low} - R{price_high}
+Please advise your next available time.
 """
 
         whatsapp = "https://wa.me/27791532379?text=" + urllib.parse.quote(msg)
+        whatsapp_visit = "https://wa.me/27791532379?text=" + urllib.parse.quote(visit_msg)
 
         save_lead(msg)
 
-    return render_template_string(HTML, price_low=price_low, price_high=price_high, whatsapp=whatsapp, breakdown=breakdown_html)
+    return render_template_string(HTML, price_low=price_low, price_high=price_high, whatsapp=whatsapp, whatsapp_visit=whatsapp_visit, breakdown=breakdown_html)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
