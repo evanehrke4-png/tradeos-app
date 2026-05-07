@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template_string
+from flask import Flask, request, render_template
 import urllib.parse
 import os
 from datetime import datetime
@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 def generate_ref():
     file = "ref.txt"
+
     if not os.path.exists(file):
         with open(file, "w") as f:
             f.write("1")
@@ -20,155 +21,22 @@ def generate_ref():
         f.write(str(new_number))
 
     year = datetime.now().year
+
     return f"Q-{year}-{str(number).zfill(4)}"
 
 def save_lead(data):
     with open("leads.txt", "a") as f:
-        f.write(data + "\n" + "-"*40 + "\n")
-
-HTML = """<!DOCTYPE html>
-<html>
-<head>
-<title>ACD Estimator</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body { font-family: Arial; background: #f4f6f8; margin: 0; }
-.container { max-width: 420px; margin: 30px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-.logo { display: block; margin: 0 auto 10px; max-width: 140px; }
-h2 { text-align: center; margin-bottom: 5px; }
-.company { text-align: center; font-size: 13px; color: #555; margin-bottom: 15px; }
-label { font-size: 14px; font-weight: bold; margin-top: 10px; display: block; }
-select, input { width: 100%; padding: 12px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; }
-button { width: 100%; padding: 14px; background: #2ecc71; border: none; color: white; font-size: 16px; border-radius: 6px; margin-top: 15px; font-weight: bold; }
-.add-btn { background: #3498db; margin-top: 10px; }
-.result { background: #eafaf1; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; }
-.whatsapp { display: block; margin-top: 10px; color: #25D366; font-weight: bold; text-decoration: none; }
-.disclaimer { font-size: 12px; color: #666; margin-top: 10px; text-align:left; }
-.footer { text-align: center; font-size: 12px; color: #888; margin-top: 20px; }
-</style>
-
-<script>
-function addItem() {
-    const container = document.getElementById("items");
-    const item = container.children[0].cloneNode(true);
-    container.appendChild(item);
-}
-</script>
-
-</head>
-
-<body>
-
-<div class="container">
-
-<img src="/static/logo.png" class="logo">
-
-<h2>ACD Estimator</h2>
-<div class="company">Aluminium & Container Dynamics (Pty) Ltd</div>
-
-<form method="POST">
-
-<div id="items">
-<div class="item">
-
-<label>Product Type</label>
-<select name="product">
-  <option>Single Hinge Door</option>
-  <option>Double Hinge Door</option>
-  <option>Sliding Door (Heavy Duty)</option>
-  <option>Sliding Door (Light Duty)</option>
-  <option>Pivot Door</option>
-  <option>Folding Door (3 Leaf)</option>
-  <option>Folding Door (5 Leaf)</option>
-  <option>Folding Door (7 Leaf)</option>
-  <option>Top Hung Window</option>
-  <option>Side Hung Window</option>
-  <option>Sliding Window</option>
-  <option>Stacking Window</option>
-  <option>Fixed Panel / Shopfront</option>
-</select>
-
-<label>Aluminium Colour</label>
-<select name="colour">
-  <option>White</option>
-  <option>Bronze</option>
-  <option>Black</option>
-  <option>Charcoal</option>
-  <option>Natural</option>
-</select>
-
-<label>Width (mm)</label>
-<input type="number" name="width">
-
-<label>Height (mm)</label>
-<input type="number" name="height">
-
-<label>Quantity</label>
-<input type="number" name="qty" value="1">
-
-<hr>
-
-</div>
-</div>
-
-<button type="button" class="add-btn" onclick="addItem()">+ Add Another Item</button>
-
-<label>Your Name</label>
-<input name="name" required>
-
-<label>Phone Number</label>
-<input name="phone" required>
-
-<label>Your Area</label>
-<input name="area">
-
-<button type="submit">Get Estimate</button>
-</form>
-
-{% if price_low %}
-<div class="result">
-
-<strong>Item Breakdown</strong><br><br>
-{{ breakdown|safe }}
-
-<strong>Total Estimate</strong><br>
-R{{price_low}} - R{{price_high}}
-
-<div class="disclaimer">
-<strong>Please Note:</strong>
-<ul style="padding-left:18px;">
-<li>Prices include manufacturing, standard installation, and delivery within a 50km radius of Johannesburg.</li>
-<li>Estimates include one site inspection and final measurements.</li>
-<li>All prices exclude 15% VAT.</li>
-<li>Estimates are based on standard specifications and provide a reliable indication of final project cost.</li>
-<li>For urgent requests or a detailed quotation breakdown, please send your estimate via WhatsApp.</li>
-</ul>
-</div>
-
-<a class="whatsapp" href="{{whatsapp}}" target="_blank">
-Send via WhatsApp
-</a>
-
-<a class="whatsapp" href="{{whatsapp_visit}}" target="_blank">
-📅 Book Site Visit
-</a>
-
-</div>
-{% endif %}
-
-<div class="footer">Powered by ACD Estimator</div>
-
-</div>
-</body>
-</html>
-"""
+        f.write(data + "\n" + "-" * 40 + "\n")
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    price_low = price_high = 0
+
+    price_low = 0
+    price_high = 0
+
     whatsapp = ""
     whatsapp_visit = ""
+
     breakdown_html = ""
 
     if request.method == "POST":
@@ -198,13 +66,19 @@ def home():
         details = ""
 
         for i in range(len(products)):
+
             if widths[i] and heights[i]:
+
                 w = float(widths[i]) / 1000
                 h = float(heights[i]) / 1000
                 q = int(qtys[i]) if qtys[i] else 1
 
                 area = w * h * q
-                min_rate, max_rate = pricing.get(products[i], (2000, 3000))
+
+                min_rate, max_rate = pricing.get(
+                    products[i],
+                    (2000, 3000)
+                )
 
                 low = area * min_rate
                 high = area * max_rate
@@ -223,7 +97,13 @@ def home():
   R{low_i:,} – R{high_i:,}
 
 """
-                breakdown_html += f"<div><strong>{products[i]}</strong><br>R{low_i:,} - R{high_i:,}</div><br>"
+
+                breakdown_html += f"""
+                <div>
+                    <strong>{products[i]}</strong><br>
+                    R{low_i:,} - R{high_i:,}
+                </div><br>
+                """
 
         price_low = int(price_low)
         price_high = int(price_high)
@@ -241,6 +121,7 @@ Area: {request.form['area']}
 
 *Project Items*
 {details}
+
 *Total Estimate*
 R{price_low:,} – R{price_high:,}
 """
@@ -258,12 +139,26 @@ Area: {request.form['area']}
 Please advise your next available time.
 """
 
-        whatsapp = "https://wa.me/27791532379?text=" + urllib.parse.quote(msg)
-        whatsapp_visit = "https://wa.me/27791532379?text=" + urllib.parse.quote(visit_msg)
+        whatsapp = (
+            "https://wa.me/27791532379?text="
+            + urllib.parse.quote(msg)
+        )
+
+        whatsapp_visit = (
+            "https://wa.me/27791532379?text="
+            + urllib.parse.quote(visit_msg)
+        )
 
         save_lead(msg)
 
-    return render_template_string(HTML, price_low=price_low, price_high=price_high, whatsapp=whatsapp, whatsapp_visit=whatsapp_visit, breakdown=breakdown_html)
+    return render_template(
+        "home.html",
+        price_low=price_low,
+        price_high=price_high,
+        whatsapp=whatsapp,
+        whatsapp_visit=whatsapp_visit,
+        breakdown=breakdown_html
+    )
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
