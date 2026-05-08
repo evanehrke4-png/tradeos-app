@@ -4,8 +4,8 @@
 
 body{
     margin:0;
-    font-family:Arial;
-    background:#f4f4f4;
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
     color:#222;
 }
 
@@ -14,11 +14,12 @@ body{
 .navbar{
     background:#000;
     color:white;
-    padding:15px 20px;
 
     display:flex;
     justify-content:space-between;
     align-items:center;
+
+    padding:18px 25px;
 
     position:sticky;
     top:0;
@@ -38,7 +39,6 @@ body{
 .nav-links a{
     color:white;
     text-decoration:none;
-    font-size:16px;
 }
 
 /* HERO */
@@ -46,58 +46,46 @@ body{
 .hero{
     background:
     linear-gradient(
-        rgba(0,0,0,0.7),
-        rgba(0,0,0,0.7)
+    rgba(0,0,0,0.7),
+    rgba(0,0,0,0.7)
     ),
     url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85');
 
     background-size:cover;
     background-position:center;
 
-    color:white;
-    text-align:center;
-
     padding:120px 20px;
+
+    text-align:center;
+    color:white;
+}
+
+.hero-logo{
+    max-width:180px;
+    margin-bottom:20px;
 }
 
 .hero h1{
     font-size:52px;
-    margin-bottom:20px;
+    margin-bottom:15px;
 }
 
 .hero p{
-    font-size:22px;
-    max-width:700px;
-    margin:auto;
-    line-height:1.5;
+    font-size:24px;
+    margin-bottom:40px;
 }
 
-.hero-buttons{
-    margin-top:40px;
-}
-
-/* BUTTONS */
-
-.btn{
-    display:inline-block;
-    background:#111;
+.hero-btn{
+    background:#25D366;
     color:white;
+
     text-decoration:none;
 
-    padding:14px 28px;
+    padding:16px 32px;
+
     border-radius:8px;
 
-    margin:10px;
-
-    transition:0.3s;
-}
-
-.btn:hover{
-    background:#333;
-}
-
-.secondary{
-    background:green;
+    font-weight:bold;
 }
 
 /* SERVICES */
@@ -109,15 +97,17 @@ body{
 
 .services h2{
     font-size:40px;
-    margin-bottom:50px;
+    margin-bottom:40px;
 }
 
 .services-grid{
     display:grid;
+
     grid-template-columns:
-    repeat(auto-fit, minmax(220px, 1fr));
+    repeat(auto-fit,minmax(220px,1fr));
 
     gap:20px;
+
     max-width:1200px;
     margin:auto;
 }
@@ -125,6 +115,7 @@ body{
 .service-card{
     background:white;
     padding:30px;
+
     border-radius:12px;
 
     box-shadow:
@@ -138,85 +129,149 @@ body{
 }
 
 .container{
-    max-width:600px;
+    max-width:900px;
     margin:auto;
+}
 
+.company{
+    text-align:center;
+    margin-bottom:20px;
+    color:#666;
+}
+
+.item{
     background:white;
-    padding:30px;
 
-    border-radius:15px;
+    padding:20px;
+
+    border-radius:10px;
+
+    margin-bottom:20px;
 
     box-shadow:
-    0 0 20px rgba(0,0,0,0.08);
+    0 0 10px rgba(0,0,0,0.08);
 }
 
-.container h2{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-form{
-    display:flex;
-    flex-direction:column;
+label{
+    display:block;
+    font-weight:bold;
+    margin-top:10px;
 }
 
 input,
-select,
-button{
-    margin-bottom:15px;
+select{
+    width:100%;
 
-    padding:16px;
+    padding:14px;
+
+    margin-top:6px;
 
     border-radius:8px;
 
     border:1px solid #ccc;
+}
+
+.add-btn{
+    width:100%;
+
+    padding:16px;
+
+    background:#2c6e91;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    margin-bottom:20px;
 
     font-size:16px;
 }
 
-button{
-    background:#000;
+.main-btn{
+    width:100%;
+
+    padding:18px;
+
+    background:#25D366;
+
     color:white;
+
     border:none;
-    cursor:pointer;
-}
 
-button:hover{
-    background:#222;
-}
+    border-radius:10px;
 
-/* RESULTS */
+    font-size:18px;
 
-.results{
-    margin-top:40px;
-    text-align:center;
-}
-
-.price{
-    font-size:34px;
     font-weight:bold;
-    margin-bottom:20px;
 }
 
-/* FOOTER */
+/* RESULT */
+
+.result{
+    background:white;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    margin-top:25px;
+
+    box-shadow:
+    0 0 15px rgba(0,0,0,0.08);
+}
+
+.breakdown-item{
+    margin-bottom:15px;
+}
+
+.whatsapp{
+    display:block;
+
+    margin-top:15px;
+
+    background:#25D366;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:15px;
+
+    border-radius:8px;
+
+    text-align:center;
+
+    font-weight:bold;
+}
+
+.disclaimer{
+    margin-top:20px;
+    font-size:14px;
+    color:#555;
+}
 
 .footer{
     background:#000;
     color:white;
+
     text-align:center;
+
     padding:25px;
-    margin-top:50px;
+
+    margin-top:60px;
 }
 
-/* WHATSAPP FLOAT */
+/* FLOATING BUTTON */
 
 .whatsapp-float{
     position:fixed;
 
-    bottom:20px;
     right:20px;
+    bottom:20px;
 
-    background:green;
+    background:#25D366;
     color:white;
 
     padding:16px 20px;
@@ -228,7 +283,7 @@ button:hover{
     font-weight:bold;
 
     box-shadow:
-    0 0 10px rgba(0,0,0,0.3);
+    0 0 15px rgba(0,0,0,0.25);
 }
 
 /* MOBILE */
@@ -246,11 +301,11 @@ button:hover{
     }
 
     .hero h1{
-        font-size:42px;
+        font-size:38px;
     }
 
     .hero p{
         font-size:20px;
     }
 
-    }
+}
