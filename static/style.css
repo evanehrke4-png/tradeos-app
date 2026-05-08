@@ -1,3 +1,7 @@
+*{
+    box-sizing:border-box;
+}
+
 body{
     margin:0;
     font-family:Arial;
@@ -5,55 +9,150 @@ body{
     color:#222;
 }
 
+/* NAVBAR */
+
 .navbar{
-    background:#111;
+    background:#000;
     color:white;
     padding:15px 20px;
 
     display:flex;
     justify-content:space-between;
     align-items:center;
+
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
 .logo{
-    font-size:22px;
+    font-size:30px;
     font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    gap:20px;
 }
 
 .nav-links a{
     color:white;
     text-decoration:none;
-    margin-left:15px;
+    font-size:16px;
 }
 
+/* HERO */
+
 .hero{
-    background:#222;
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.7),
+        rgba(0,0,0,0.7)
+    ),
+    url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85');
+
+    background-size:cover;
+    background-position:center;
+
     color:white;
     text-align:center;
-    padding:70px 20px;
+
+    padding:120px 20px;
 }
 
 .hero h1{
-    font-size:42px;
-    margin-bottom:10px;
+    font-size:52px;
+    margin-bottom:20px;
 }
 
 .hero p{
-    font-size:20px;
+    font-size:22px;
+    max-width:700px;
+    margin:auto;
+    line-height:1.5;
+}
+
+.hero-buttons{
+    margin-top:40px;
+}
+
+/* BUTTONS */
+
+.btn{
+    display:inline-block;
+    background:#111;
+    color:white;
+    text-decoration:none;
+
+    padding:14px 28px;
+    border-radius:8px;
+
+    margin:10px;
+
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#333;
+}
+
+.secondary{
+    background:green;
+}
+
+/* SERVICES */
+
+.services{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.services h2{
+    font-size:40px;
+    margin-bottom:50px;
+}
+
+.services-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+    gap:20px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.service-card{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+
+    box-shadow:
+    0 0 15px rgba(0,0,0,0.08);
+}
+
+/* ESTIMATOR */
+
+.estimator-section{
+    padding:60px 20px;
 }
 
 .container{
-    max-width:500px;
+    max-width:600px;
     margin:auto;
+
     background:white;
-    padding:25px;
-    margin-top:30px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:
+    0 0 20px rgba(0,0,0,0.08);
 }
 
-.estimator-section{
-    padding:20px;
+.container h2{
+    text-align:center;
+    margin-bottom:30px;
 }
 
 form{
@@ -65,43 +164,93 @@ input,
 select,
 button{
     margin-bottom:15px;
-    padding:14px;
-    border-radius:6px;
+
+    padding:16px;
+
+    border-radius:8px;
+
     border:1px solid #ccc;
+
     font-size:16px;
 }
 
 button{
-    background:#111;
+    background:#000;
     color:white;
     border:none;
     cursor:pointer;
 }
 
 button:hover{
-    background:#333;
+    background:#222;
 }
 
+/* RESULTS */
+
 .results{
-    margin-top:30px;
+    margin-top:40px;
     text-align:center;
 }
 
 .price{
-    font-size:30px;
+    font-size:34px;
     font-weight:bold;
+    margin-bottom:20px;
 }
 
-.btn{
-    display:block;
+/* FOOTER */
+
+.footer{
+    background:#000;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:50px;
+}
+
+/* WHATSAPP FLOAT */
+
+.whatsapp-float{
+    position:fixed;
+
+    bottom:20px;
+    right:20px;
+
     background:green;
     color:white;
+
+    padding:16px 20px;
+
+    border-radius:50px;
+
     text-decoration:none;
-    padding:14px;
-    margin-top:15px;
-    border-radius:6px;
+
+    font-weight:bold;
+
+    box-shadow:
+    0 0 10px rgba(0,0,0,0.3);
 }
 
-.secondary{
-    background:#333;
-}
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .hero p{
+        font-size:20px;
+    }
+
+    }
