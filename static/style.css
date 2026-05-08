@@ -1,100 +1,83 @@
-/* RESET */
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    margin: 0;
-    padding: 0;
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f4f4;
+    color:#222;
 }
 
-/* MAIN CONTAINER */
-.container {
-    width: 100%;
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 15px;
+.navbar{
+    background:#111;
+    color:white;
+    padding:15px 20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-/* CARD */
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    margin-left:15px;
 }
 
-/* LOGO */
-.logo {
-    width: 320px;
-    max-width: 90%;
-    display: block;
-    margin: 0 auto 10px;
+.hero{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:60px 20px;
 }
 
-/* TITLES */
-h1 {
-    text-align: center;
-    margin-bottom: 5px;
+.container{
+    max-width:500px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    margin-top:30px;
+    border-radius:10px;
 }
 
-.subtitle {
-    text-align: center;
-    color: #666;
-    margin-bottom: 25px;
+form{
+    display:flex;
+    flex-direction:column;
 }
 
-/* ITEM BLOCK */
-.item {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
+input,
+select,
+button{
+    margin-bottom:15px;
+    padding:12px;
+    border-radius:6px;
+    border:1px solid #ccc;
 }
 
-/* FULL WIDTH FIELDS */
-.item label:nth-child(1),
-.item select:nth-child(2),
-.item label:nth-child(3),
-.item select:nth-child(4) {
-    grid-column: span 2;
+button{
+    background:#111;
+    color:white;
+    border:none;
+    cursor:pointer;
 }
 
-/* INPUTS */
-input, select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+.results{
+    margin-top:30px;
+    text-align:center;
 }
 
-/* ADD ITEM BUTTON */
-.add-btn {
-    width: 100%;
-    padding: 14px;
-    background: #2c6e91;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    margin: 15px 0;
-    font-size: 16px;
+.price{
+    font-size:28px;
+    font-weight:bold;
 }
 
-/* MAIN BUTTON */
-.main-btn {
-    width: 100%;
-    margin-top: 25px;
-    padding: 18px;
-    background: #25D366;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: bold;
+.btn{
+    display:block;
+    background:green;
+    color:white;
+    text-decoration:none;
+    padding:14px;
+    margin-top:15px;
+    border-radius:6px;
 }
 
-/* FORM SPACING */
-label {
-    font-weight: bold;
-    margin-top: 10px;
-    display: block;
+.secondary{
+    background:#333;
 }
