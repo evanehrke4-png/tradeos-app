@@ -2,227 +2,291 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACD TradeOS</title>
+
+    <meta name="viewport"
+          content="width=device-width,
+          initial-scale=1.0">
+
+    <title>
+        Aluminium & Container Dynamics (Pty) Ltd
+    </title>
 
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+          href="{{ url_for('static',
+          filename='style.css') }}">
 </head>
+
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
+<!-- NAVBAR -->
 
-        <div class="logo">
-            ACD TradeOS
-        </div>
+<nav class="navbar">
 
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="#">Services</a>
-            <a href="#">Gallery</a>
-            <a href="#">Contact</a>
-        </div>
+    <div class="logo">
+        ACD
+    </div>
 
-    </nav>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="#">Services</a>
+        <a href="#">Gallery</a>
+        <a href="#">Contact</a>
+    </div>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
+</nav>
 
-        <div class="hero-overlay">
+<!-- HERO -->
 
-            <h1>
-                Premium Aluminium & Glass Solutions
-            </h1>
+<section class="hero">
 
-            <p>
-                Aluminium Windows, Doors, Frameless Showers,
-                Glass Balustrades & Installations
-                Across Johannesburg & Surrounding Areas.
-            </p>
+    <div class="hero-overlay">
 
-            <div class="hero-buttons">
+        <img src="/static/logo.png"
+             class="hero-logo">
 
-                <a href="#estimator" class="btn">
-                    Get Instant Quote
-                </a>
-
-                <a href="https://wa.me/27791532379"
-                   class="btn secondary">
-                    WhatsApp Us
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- SERVICES -->
-    <section class="services">
-
-        <h2>Our Services</h2>
-
-        <div class="services-grid">
-
-            <div class="service-card">
-                <h3>Aluminium Windows</h3>
-
-                <p>
-                    Custom aluminium window systems
-                    for homes and businesses.
-                </p>
-            </div>
-
-            <div class="service-card">
-                <h3>Aluminium Doors</h3>
-
-                <p>
-                    Sliding, pivot, folding and entrance doors.
-                </p>
-            </div>
-
-            <div class="service-card">
-                <h3>Frameless Showers</h3>
-
-                <p>
-                    Modern frameless glass shower installations.
-                </p>
-            </div>
-
-            <div class="service-card">
-                <h3>Glass Balustrades</h3>
-
-                <p>
-                    Premium glass balustrades
-                    for balconies and staircases.
-                </p>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ESTIMATOR -->
-    <section class="estimator-section" id="estimator">
-
-        <div class="container">
-
-            <h2>Instant Online Estimator</h2>
-
-            <form method="POST">
-
-                <input type="text"
-                       name="name"
-                       placeholder="Your Name"
-                       required>
-
-                <input type="text"
-                       name="phone"
-                       placeholder="Phone Number"
-                       required>
-
-                <input type="text"
-                       name="area"
-                       placeholder="Area"
-                       required>
-
-                <select name="product">
-
-                    <option>
-                        Sliding Door (Heavy Duty)
-                    </option>
-
-                    <option>
-                        Single Hinge Door
-                    </option>
-
-                    <option>
-                        Sliding Window
-                    </option>
-
-                </select>
-
-                <select name="colour">
-
-                    <option>Charcoal</option>
-                    <option>White</option>
-                    <option>Natural</option>
-
-                </select>
-
-                <input type="number"
-                       name="width"
-                       placeholder="Width mm"
-                       required>
-
-                <input type="number"
-                       name="height"
-                       placeholder="Height mm"
-                       required>
-
-                <input type="number"
-                       name="qty"
-                       value="1"
-                       required>
-
-                <button type="submit">
-                    Calculate Estimate
-                </button>
-
-            </form>
-
-            {% if price_low > 0 %}
-
-            <div class="results">
-
-                <h3>
-                    Estimate Range
-                </h3>
-
-                <p class="price">
-                    R{{ "{:,}".format(price_low) }}
-                    -
-                    R{{ "{:,}".format(price_high) }}
-                </p>
-
-                <div class="breakdown">
-                    {{ breakdown|safe }}
-                </div>
-
-                <a href="{{ whatsapp }}"
-                   class="btn">
-                    WhatsApp Quote
-                </a>
-
-                <a href="{{ whatsapp_visit }}"
-                   class="btn secondary">
-                    Book Site Visit
-                </a>
-
-            </div>
-
-            {% endif %}
-
-        </div>
-
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
+        <h1>
+            Aluminium & Container
+            Dynamics (Pty) Ltd
+        </h1>
 
         <p>
-            © 2026 ACD TradeOS |
-            Johannesburg & Surrounding Areas
+            Precision Workmanship.
+            Professional Results.
         </p>
 
-    </footer>
+        <a href="#estimator"
+           class="hero-btn">
+            Get Instant Estimate
+        </a>
 
-    <!-- FLOATING WHATSAPP -->
-    <a href="https://wa.me/27791532379"
-       class="whatsapp-float">
-        WhatsApp
-    </a>
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section class="services">
+
+    <h2>Our Services</h2>
+
+    <div class="services-grid">
+
+        <div class="service-card">
+            <h3>Aluminium Windows</h3>
+            <p>
+                Premium aluminium window systems
+                for homes and businesses.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <h3>Aluminium Doors</h3>
+            <p>
+                Sliding, folding, pivot and
+                entrance door systems.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <h3>Frameless Showers</h3>
+            <p>
+                Modern frameless glass shower
+                installations.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <h3>Glass Balustrades</h3>
+            <p>
+                Stylish and secure glass
+                balustrade systems.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ESTIMATOR -->
+
+<section class="estimator-section"
+         id="estimator">
+
+<div class="container">
+
+    <h2>Instant Online Estimator</h2>
+
+    <div class="company">
+        Johannesburg & Surrounding Areas
+    </div>
+
+<form method="POST">
+
+<div id="items">
+
+<div class="item">
+
+<label>Product Type</label>
+
+<select name="product">
+  <option>Single Hinge Door</option>
+  <option>Double Hinge Door</option>
+  <option>Sliding Door (Heavy Duty)</option>
+  <option>Sliding Door (Light Duty)</option>
+  <option>Pivot Door</option>
+  <option>Folding Door (3 Leaf)</option>
+  <option>Folding Door (5 Leaf)</option>
+  <option>Folding Door (7 Leaf)</option>
+  <option>Top Hung Window</option>
+  <option>Side Hung Window</option>
+  <option>Sliding Window</option>
+  <option>Stacking Window</option>
+  <option>Fixed Panel / Shopfront</option>
+</select>
+
+<label>Aluminium Colour</label>
+
+<select name="colour">
+  <option>White</option>
+  <option>Bronze</option>
+  <option>Black</option>
+  <option>Charcoal</option>
+  <option>Natural</option>
+</select>
+
+<label>Width (mm)</label>
+<input type="number" name="width">
+
+<label>Height (mm)</label>
+<input type="number" name="height">
+
+<label>Quantity</label>
+<input type="number" name="qty" value="1">
+
+<hr>
+
+</div>
+</div>
+
+<button type="button"
+        class="add-btn"
+        onclick="addItem()">
+        + Add Another Item
+</button>
+
+<label>Your Name</label>
+<input name="name" required>
+
+<label>Phone Number</label>
+<input name="phone" required>
+
+<label>Your Area</label>
+<input name="area">
+
+<button type="submit"
+        class="main-btn">
+        Get Estimate
+</button>
+
+</form>
+
+{% if price_low %}
+
+<div class="result">
+
+<strong>Item Breakdown</strong><br><br>
+
+{{ breakdown|safe }}
+
+<h3>
+R{{price_low:,}} - R{{price_high:,}}
+</h3>
+
+<div class="disclaimer">
+
+<strong>Please Note:</strong>
+
+<ul>
+<li>
+Prices include manufacturing,
+standard installation,
+and delivery within 50km
+of Johannesburg.
+</li>
+
+<li>
+All prices exclude 15% VAT.
+</li>
+
+<li>
+Estimates are based on
+standard specifications.
+</li>
+
+<li>
+For urgent requests,
+please send estimate via WhatsApp.
+</li>
+</ul>
+
+</div>
+
+<a class="whatsapp"
+   href="{{whatsapp}}"
+   target="_blank">
+
+Send via WhatsApp
+
+</a>
+
+<a class="whatsapp"
+   href="{{whatsapp_visit}}"
+   target="_blank">
+
+📅 Book Site Visit
+
+</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    © 2026 Aluminium &
+    Container Dynamics (Pty) Ltd
+
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+
+<a href="https://wa.me/27791532379"
+   class="whatsapp-float">
+
+WhatsApp
+
+</a>
+
+<script>
+
+function addItem() {
+
+    const container =
+    document.getElementById("items");
+
+    const item =
+    container.children[0].cloneNode(true);
+
+    container.appendChild(item);
+}
+
+</script>
 
 </body>
-</html>
+    </html>
