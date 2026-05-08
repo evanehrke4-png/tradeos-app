@@ -99,10 +99,10 @@ def home():
 """
 
                 breakdown_html += f"""
-                <div>
+                <div class="breakdown-item">
                     <strong>{products[i]}</strong><br>
                     R{low_i:,} - R{high_i:,}
-                </div><br>
+                </div>
                 """
 
         price_low = int(price_low)
