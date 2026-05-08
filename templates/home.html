@@ -73,6 +73,7 @@
 
         <div class="service-card">
             <h3>Aluminium Windows</h3>
+
             <p>
                 Premium aluminium window systems
                 for homes and businesses.
@@ -81,6 +82,7 @@
 
         <div class="service-card">
             <h3>Aluminium Doors</h3>
+
             <p>
                 Sliding, folding, pivot and
                 entrance door systems.
@@ -89,6 +91,7 @@
 
         <div class="service-card">
             <h3>Frameless Showers</h3>
+
             <p>
                 Modern frameless glass shower
                 installations.
@@ -97,6 +100,7 @@
 
         <div class="service-card">
             <h3>Glass Balustrades</h3>
+
             <p>
                 Stylish and secure glass
                 balustrade systems.
@@ -171,21 +175,28 @@
 <button type="button"
         class="add-btn"
         onclick="addItem()">
+
         + Add Another Item
+
 </button>
 
 <label>Your Name</label>
+
 <input name="name" required>
 
 <label>Phone Number</label>
+
 <input name="phone" required>
 
 <label>Your Area</label>
+
 <input name="area">
 
 <button type="submit"
         class="main-btn">
+
         Get Estimate
+
 </button>
 
 </form>
@@ -194,12 +205,20 @@
 
 <div class="result">
 
-<strong>Item Breakdown</strong><br><br>
+<strong>Item Breakdown</strong>
+
+<br><br>
 
 {{ breakdown|safe }}
 
 <h3>
-R{{price_low:,}} - R{{price_high:,}}
+
+R{{ "{:,}".format(price_low) }}
+
+-
+
+R{{ "{:,}".format(price_high) }}
+
 </h3>
 
 <div class="disclaimer">
@@ -207,6 +226,7 @@ R{{price_low:,}} - R{{price_high:,}}
 <strong>Please Note:</strong>
 
 <ul>
+
 <li>
 Prices include manufacturing,
 standard installation,
@@ -227,6 +247,7 @@ standard specifications.
 For urgent requests,
 please send estimate via WhatsApp.
 </li>
+
 </ul>
 
 </div>
@@ -289,4 +310,4 @@ function addItem() {
 </script>
 
 </body>
-    </html>
+</html>
