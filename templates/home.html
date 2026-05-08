@@ -1,33 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <title>Aluminium & Container Dynamics (Pty) Ltd</title>
 
     <meta name="viewport"
-          content="width=device-width,
-          initial-scale=1.0">
-
-    <title>
-        Aluminium & Container Dynamics (Pty) Ltd
-    </title>
+          content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet"
-          href="{{ url_for('static',
-          filename='style.css') }}">
+          href="/static/style.css">
 </head>
 
 <body>
 
 <!-- NAVBAR -->
-
 <nav class="navbar">
 
-    <div class="logo">
-        ACD
+    <div class="logo-text">
+        <h1>ACD</h1>
+
+        <div class="company-name">
+            Aluminium & Container Dynamics (Pty) Ltd
+        </div>
+
+        <div class="tagline">
+            Precision Workmanship. Professional Results.
+        </div>
     </div>
 
     <div class="nav-links">
-        <a href="/">Home</a>
+        <a href="#">Home</a>
         <a href="#">Services</a>
         <a href="#">Gallery</a>
         <a href="#">Contact</a>
@@ -36,22 +37,17 @@
 </nav>
 
 <!-- HERO -->
-
 <section class="hero">
 
     <div class="hero-overlay">
 
-        <img src="/static/logo.png"
-             class="hero-logo">
-
         <h1>
-            Aluminium & Container
-            Dynamics (Pty) Ltd
+            Aluminium & Glass Specialists
         </h1>
 
         <p>
-            Precision Workmanship.
-            Professional Results.
+            Premium aluminium,
+            glass and architectural solutions.
         </p>
 
         <a href="#estimator"
@@ -63,66 +59,18 @@
 
 </section>
 
-<!-- SERVICES -->
-
-<section class="services">
-
-    <h2>Our Services</h2>
-
-    <div class="services-grid">
-
-        <div class="service-card">
-            <h3>Aluminium Windows</h3>
-
-            <p>
-                Premium aluminium window systems
-                for homes and businesses.
-            </p>
-        </div>
-
-        <div class="service-card">
-            <h3>Aluminium Doors</h3>
-
-            <p>
-                Sliding, folding, pivot and
-                entrance door systems.
-            </p>
-        </div>
-
-        <div class="service-card">
-            <h3>Frameless Showers</h3>
-
-            <p>
-                Modern frameless glass shower
-                installations.
-            </p>
-        </div>
-
-        <div class="service-card">
-            <h3>Glass Balustrades</h3>
-
-            <p>
-                Stylish and secure glass
-                balustrade systems.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
 <!-- ESTIMATOR -->
-
 <section class="estimator-section"
          id="estimator">
 
 <div class="container">
 
-    <h2>Instant Online Estimator</h2>
+<div class="card">
 
-    <div class="company">
-        Johannesburg & Surrounding Areas
-    </div>
+<img src="/static/logo.png"
+     class="estimator-logo">
+
+<h2>ACD Instant Estimator</h2>
 
 <form method="POST">
 
@@ -170,32 +118,30 @@
 <hr>
 
 </div>
+
 </div>
 
 <button type="button"
         class="add-btn"
         onclick="addItem()">
 
-        + Add Another Item
++ Add Another Item
 
 </button>
 
 <label>Your Name</label>
-
 <input name="name" required>
 
 <label>Phone Number</label>
-
 <input name="phone" required>
 
 <label>Your Area</label>
-
 <input name="area">
 
 <button type="submit"
         class="main-btn">
 
-        Get Estimate
+Get Estimate
 
 </button>
 
@@ -206,20 +152,14 @@
 <div class="result">
 
 <strong>Item Breakdown</strong>
-
 <br><br>
 
 {{ breakdown|safe }}
 
-<h3>
+<strong>Total Estimate</strong>
+<br>
 
-R{{ "{:,}".format(price_low) }}
-
--
-
-R{{ "{:,}".format(price_high) }}
-
-</h3>
+R{{price_low}} - R{{price_high}}
 
 <div class="disclaimer">
 
@@ -230,8 +170,8 @@ R{{ "{:,}".format(price_high) }}
 <li>
 Prices include manufacturing,
 standard installation,
-and delivery within 50km
-of Johannesburg.
+and delivery within Johannesburg
+and surrounding areas.
 </li>
 
 <li>
@@ -239,13 +179,7 @@ All prices exclude 15% VAT.
 </li>
 
 <li>
-Estimates are based on
-standard specifications.
-</li>
-
-<li>
-For urgent requests,
-please send estimate via WhatsApp.
+Estimates are based on standard specifications.
 </li>
 
 </ul>
@@ -264,7 +198,7 @@ Send via WhatsApp
    href="{{whatsapp_visit}}"
    target="_blank">
 
-📅 Book Site Visit
+Book Site Visit
 
 </a>
 
@@ -273,22 +207,48 @@ Send via WhatsApp
 {% endif %}
 
 </div>
+</div>
 
 </section>
 
-<!-- FOOTER -->
+<!-- SERVICES -->
+<section class="services">
 
-<footer class="footer">
+<h2>Our Services</h2>
 
-    © 2026 Aluminium &
-    Container Dynamics (Pty) Ltd
+<div class="service-grid">
 
-</footer>
+<div class="service-card">
+Aluminium Windows
+</div>
 
-<!-- FLOATING WHATSAPP -->
+<div class="service-card">
+Aluminium Doors
+</div>
 
+<div class="service-card">
+Frameless Showers
+</div>
+
+<div class="service-card">
+Glass Balustrades
+</div>
+
+<div class="service-card">
+General Maintenance
+</div>
+
+<div class="service-card">
+Shopfronts & Installations
+</div>
+
+</div>
+
+</section>
+
+<!-- WHATSAPP BUTTON -->
 <a href="https://wa.me/27791532379"
-   class="whatsapp-float">
+   class="floating-whatsapp">
 
 WhatsApp
 
