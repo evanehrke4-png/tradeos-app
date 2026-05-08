@@ -1,1 +1,150 @@
-<h1>TradeOS Working</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ACD TradeOS Estimator</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            ACD TradeOS
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="#">Services</a>
+            <a href="#">Gallery</a>
+            <a href="#">Contact</a>
+        </div>
+
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <h1>
+            Aluminium & Glass Specialists
+        </h1>
+
+        <p>
+            Windows, Doors, Showers,
+            Balustrades & Installations
+        </p>
+
+    </section>
+
+    <!-- ESTIMATOR -->
+    <section class="estimator-section">
+
+        <div class="container">
+
+            <h2>Instant Online Estimator</h2>
+
+            <form method="POST">
+
+                <input type="text"
+                       name="name"
+                       placeholder="Your Name"
+                       required>
+
+                <input type="text"
+                       name="phone"
+                       placeholder="Phone Number"
+                       required>
+
+                <input type="text"
+                       name="area"
+                       placeholder="Area"
+                       required>
+
+                <select name="product">
+
+                    <option>
+                        Sliding Door (Heavy Duty)
+                    </option>
+
+                    <option>
+                        Single Hinge Door
+                    </option>
+
+                    <option>
+                        Sliding Window
+                    </option>
+
+                </select>
+
+                <select name="colour">
+
+                    <option>Charcoal</option>
+                    <option>White</option>
+                    <option>Natural</option>
+
+                </select>
+
+                <input type="number"
+                       name="width"
+                       placeholder="Width mm"
+                       required>
+
+                <input type="number"
+                       name="height"
+                       placeholder="Height mm"
+                       required>
+
+                <input type="number"
+                       name="qty"
+                       value="1"
+                       required>
+
+                <button type="submit">
+                    Calculate Estimate
+                </button>
+
+            </form>
+
+            {% if price_low > 0 %}
+
+            <div class="results">
+
+                <h3>
+                    Estimate Range
+                </h3>
+
+                <p class="price">
+                    R{{ "{:,}".format(price_low) }}
+                    -
+                    R{{ "{:,}".format(price_high) }}
+                </p>
+
+                <div class="breakdown">
+                    {{ breakdown|safe }}
+                </div>
+
+                <a href="{{ whatsapp }}"
+                   class="btn">
+                    WhatsApp Quote
+                </a>
+
+                <a href="{{ whatsapp_visit }}"
+                   class="btn secondary">
+                    Book Site Visit
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+</body>
+</html>
