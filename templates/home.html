@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <title>Aluminium & Container Dynamics (Pty) Ltd</title>
 
     <meta name="viewport"
@@ -8,14 +9,76 @@
 
     <link rel="stylesheet"
           href="/static/style.css">
+
 </head>
 
 <body>
 
+<!-- ASSISTANT POPUP -->
+
+<div class="assistant-popup" id="assistantPopup">
+
+    <div class="assistant-header">
+        ACD Assistant 👋
+    </div>
+
+    <div class="assistant-content">
+
+        <p>
+            Need assistance with our products or services?
+        </p>
+
+        <p>
+            I can help you with the following:
+        </p>
+
+        <div class="assistant-buttons">
+
+            <a href="#services">View Products</a>
+
+            <a href="#services">Explore Services</a>
+
+            <a href="#estimator">Get Instant Estimates</a>
+
+            <a href="{{whatsapp_visit}}" target="_blank">
+                Book a Site Visit
+            </a>
+
+            <a href="https://wa.me/27791532379"
+               target="_blank">
+
+               Contact Us on WhatsApp
+            </a>
+
+            <a href="https://www.facebook.com/share/1L4xfwdMGR/"
+               target="_blank">
+
+               Visit Our Facebook Page
+            </a>
+
+            <a href="#reviews">
+                Leave a Review
+            </a>
+
+        </div>
+
+        <button class="assistant-close"
+                onclick="closeAssistant()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
 <!-- NAVBAR -->
+
 <nav class="navbar">
 
     <div class="logo-text">
+
         <h1>ACD</h1>
 
         <div class="company-name">
@@ -25,18 +88,22 @@
         <div class="tagline">
             Precision Workmanship. Professional Results.
         </div>
+
     </div>
 
     <div class="nav-links">
+
         <a href="#">Home</a>
-        <a href="#">Services</a>
-        <a href="#">Gallery</a>
-        <a href="#">Contact</a>
+        <a href="#services">Services</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+
     </div>
 
 </nav>
 
 <!-- HERO -->
+
 <section class="hero">
 
     <div class="hero-overlay">
@@ -46,13 +113,14 @@
         </h1>
 
         <p>
-            Premium aluminium,
-            glass and architectural solutions.
+            Premium aluminium and glass solutions.
         </p>
 
         <a href="#estimator"
            class="hero-btn">
+
             Get Instant Estimate
+
         </a>
 
     </div>
@@ -60,6 +128,7 @@
 </section>
 
 <!-- ESTIMATOR -->
+
 <section class="estimator-section"
          id="estimator">
 
@@ -81,6 +150,7 @@
 <label>Product Type</label>
 
 <select name="product">
+
   <option>Single Hinge Door</option>
   <option>Double Hinge Door</option>
   <option>Sliding Door (Heavy Duty)</option>
@@ -94,16 +164,19 @@
   <option>Sliding Window</option>
   <option>Stacking Window</option>
   <option>Fixed Panel / Shopfront</option>
+
 </select>
 
 <label>Aluminium Colour</label>
 
 <select name="colour">
+
   <option>White</option>
   <option>Bronze</option>
   <option>Black</option>
   <option>Charcoal</option>
   <option>Natural</option>
+
 </select>
 
 <label>Width (mm)</label>
@@ -113,7 +186,9 @@
 <input type="number" name="height">
 
 <label>Quantity</label>
-<input type="number" name="qty" value="1">
+<input type="number"
+       name="qty"
+       value="1">
 
 <hr>
 
@@ -152,11 +227,13 @@ Get Estimate
 <div class="result">
 
 <strong>Item Breakdown</strong>
+
 <br><br>
 
 {{ breakdown|safe }}
 
 <strong>Total Estimate</strong>
+
 <br>
 
 R{{price_low}} - R{{price_high}}
@@ -170,8 +247,8 @@ R{{price_low}} - R{{price_high}}
 <li>
 Prices include manufacturing,
 standard installation,
-and delivery within Johannesburg
-and surrounding areas.
+and delivery within a 30KM radius
+of Johannesburg.
 </li>
 
 <li>
@@ -212,45 +289,159 @@ Book Site Visit
 </section>
 
 <!-- SERVICES -->
-<section class="services">
+
+<section class="services"
+         id="services">
 
 <h2>Our Services</h2>
+
+<p class="services-subtitle">
+Select a service to learn more.
+</p>
 
 <div class="service-grid">
 
 <div class="service-card">
-Aluminium Windows
+
+<h3>Aluminium Windows</h3>
+
+<p>
+Modern aluminium window systems
+designed for durability,
+style, ventilation and security.
+</p>
+
 </div>
 
 <div class="service-card">
-Aluminium Doors
+
+<h3>Aluminium Doors</h3>
+
+<p>
+Premium aluminium door systems
+for residential, commercial
+and architectural applications.
+</p>
+
+<ul>
+<li>Single Hinge Doors</li>
+<li>Double Hinge Doors</li>
+<li>Pivot Doors</li>
+<li>Heavy Duty Sliding Doors</li>
+<li>Light Duty Sliding Doors</li>
+<li>Vista Folding Stacking Doors</li>
+</ul>
+
 </div>
 
 <div class="service-card">
-Frameless Showers
+
+<h3>Aluminium Shopfronts</h3>
+
+<p>
+Professional shopfront solutions
+for retail, office and commercial spaces.
+</p>
+
 </div>
 
 <div class="service-card">
-Glass Balustrades
+
+<h3>Maintenance & Repairs</h3>
+
+<p>
+Repairs, servicing and maintenance
+for aluminium systems,
+glass and general installations.
+</p>
+
 </div>
 
 <div class="service-card">
-General Maintenance
-</div>
 
-<div class="service-card">
-Shopfronts & Installations
+<h3>
+Modular Insulated Structures &
+Container Conversions
+</h3>
+
+<p>
+Custom-built modular structures,
+mobile insulated units,
+offices, classrooms,
+storage facilities and
+shipping container conversions.
+</p>
+
 </div>
 
 </div>
 
 </section>
 
-<!-- WHATSAPP BUTTON -->
+<!-- REVIEWS -->
+
+<section class="reviews"
+         id="reviews">
+
+<h2>Customer Reviews</h2>
+
+<p class="review-text">
+
+Customer reviews are reviewed
+before being published publicly.
+
+</p>
+
+<div class="review-box">
+
+<input type="text"
+       placeholder="Your Name">
+
+<textarea placeholder="Leave your review here..."></textarea>
+
+<button>
+Submit Review
+</button>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer"
+        id="contact">
+
+<h2>
+Aluminium & Container Dynamics (Pty) Ltd
+</h2>
+
+<p>
+Professional aluminium,
+glass and modular structure solutions.
+</p>
+
+<p>
+Johannesburg, South Africa
+</p>
+
+</footer>
+
+<!-- FLOATING BUTTONS -->
+
 <a href="https://wa.me/27791532379"
-   class="floating-whatsapp">
+   class="floating-whatsapp"
+   target="_blank">
 
 WhatsApp
+
+</a>
+
+<a href="https://www.facebook.com/share/1L4xfwdMGR/"
+   class="floating-facebook"
+   target="_blank">
+
+Facebook
 
 </a>
 
@@ -265,6 +456,13 @@ function addItem() {
     container.children[0].cloneNode(true);
 
     container.appendChild(item);
+}
+
+function closeAssistant() {
+
+    document.getElementById(
+        "assistantPopup"
+    ).style.display = "none";
 }
 
 </script>
