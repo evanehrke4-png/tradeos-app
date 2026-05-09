@@ -2,35 +2,89 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     background: #f4f4f4;
+    color: #222;
+}
+
+/* ASSISTANT */
+
+.assistant-popup {
+    position: fixed;
+    bottom: 100px;
+    left: 20px;
+    width: 320px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.assistant-header {
+    background: #1565c0;
+    color: white;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.assistant-content {
+    padding: 20px;
+}
+
+.assistant-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.assistant-buttons a {
+    background: #f1f1f1;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #222;
+    font-weight: bold;
+}
+
+.assistant-close {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #1565c0;
+    color: white;
+    border: none;
+    border-radius: 10px;
 }
 
 /* NAVBAR */
 
 .navbar {
-    background: black;
+    background: #1565c0;
     color: white;
-    padding: 20px;
+    padding: 22px;
     text-align: center;
 }
 
 .logo-text h1 {
     margin: 0;
-    font-size: 56px;
+    font-size: 58px;
 }
 
 .company-name {
-    font-size: 18px;
-    margin-top: 5px;
+    font-size: 24px;
+    margin-top: 8px;
+    font-weight: bold;
 }
 
 .tagline {
-    font-size: 14px;
-    color: #ccc;
-    margin-top: 6px;
+    font-size: 15px;
+    margin-top: 8px;
+    color: #e0e0e0;
 }
 
 .nav-links {
-    margin-top: 20px;
+    margin-top: 24px;
 }
 
 .nav-links a {
@@ -38,18 +92,21 @@ body {
     text-decoration: none;
     margin: 0 14px;
     font-size: 20px;
+    font-weight: bold;
 }
 
 /* HERO */
 
 .hero {
-    height: 650px;
+    height: 680px;
+
     background:
     linear-gradient(
         rgba(0,0,0,0.55),
         rgba(0,0,0,0.55)
     ),
-    url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop');
+    url('https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1600&auto=format&fit=crop');
+
     background-size: cover;
     background-position: center;
 
@@ -65,30 +122,30 @@ body {
 }
 
 .hero-overlay h1 {
-    font-size: 68px;
-    line-height: 1.1;
+    font-size: 72px;
     margin-bottom: 20px;
 }
 
 .hero-overlay p {
-    font-size: 28px;
+    font-size: 30px;
     margin-bottom: 40px;
 }
 
 .hero-btn {
-    background: #2ecc71;
+    background: #25D366;
     color: white;
     padding: 22px 45px;
     text-decoration: none;
-    border-radius: 10px;
-    font-size: 28px;
+    border-radius: 12px;
+    font-size: 26px;
     font-weight: bold;
 }
 
 /* ESTIMATOR */
 
 .estimator-section {
-    padding: 60px 15px;
+    padding: 70px 15px;
+    background: #e9ecef;
 }
 
 .container {
@@ -99,8 +156,8 @@ body {
 .card {
     background: white;
     padding: 35px;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
 }
 
 .estimator-logo {
@@ -113,7 +170,7 @@ body {
 .card h2 {
     text-align: center;
     margin-bottom: 30px;
-    font-size: 42px;
+    font-size: 44px;
 }
 
 .item {
@@ -135,7 +192,8 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
     width: 100%;
     padding: 16px;
     border-radius: 10px;
@@ -147,12 +205,13 @@ select {
 .add-btn {
     width: 100%;
     padding: 16px;
-    background: #2c6e91;
-    color: white;
+    background: silver;
+    color: #222;
     border: none;
     border-radius: 10px;
     margin: 20px 0;
     font-size: 18px;
+    font-weight: bold;
 }
 
 .main-btn {
@@ -191,35 +250,104 @@ select {
 /* SERVICES */
 
 .services {
-    padding: 70px 20px;
+    padding: 80px 20px;
     text-align: center;
 }
 
 .services h2 {
-    font-size: 54px;
-    margin-bottom: 40px;
+    font-size: 56px;
+    margin-bottom: 10px;
+}
+
+.services-subtitle {
+    font-size: 22px;
+    margin-bottom: 50px;
+    color: #666;
 }
 
 .service-grid {
     display: grid;
     grid-template-columns:
-    repeat(auto-fit, minmax(250px,1fr));
+    repeat(auto-fit, minmax(300px,1fr));
 
-    gap: 20px;
-    max-width: 1100px;
+    gap: 24px;
+    max-width: 1200px;
     margin: auto;
 }
 
 .service-card {
     background: white;
-    padding: 40px 20px;
-    border-radius: 14px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    font-size: 24px;
-    font-weight: bold;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+    text-align: left;
 }
 
-/* WHATSAPP FLOAT */
+.service-card h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #1565c0;
+}
+
+.service-card p {
+    line-height: 1.7;
+}
+
+.service-card ul {
+    margin-top: 20px;
+}
+
+/* REVIEWS */
+
+.reviews {
+    padding: 80px 20px;
+    background: #f5f5f5;
+    text-align: center;
+}
+
+.reviews h2 {
+    font-size: 52px;
+}
+
+.review-text {
+    font-size: 20px;
+    color: #666;
+}
+
+.review-box {
+    max-width: 700px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+}
+
+.review-box textarea {
+    height: 140px;
+    margin-top: 20px;
+}
+
+.review-box button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 18px;
+    background: #1565c0;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+/* FOOTER */
+
+.footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+/* FLOATING BUTTONS */
 
 .floating-whatsapp {
     position: fixed;
@@ -228,9 +356,22 @@ select {
     background: #25D366;
     color: white;
     text-decoration: none;
-    padding: 20px 28px;
+    padding: 18px 24px;
     border-radius: 50px;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.floating-facebook {
+    position: fixed;
+    right: 20px;
+    bottom: 90px;
+    background: #1877f2;
+    color: white;
+    text-decoration: none;
+    padding: 18px 24px;
+    border-radius: 50px;
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -243,11 +384,11 @@ select {
 }
 
 .hero-overlay h1 {
-    font-size: 34px;
+    font-size: 40px;
 }
 
 .hero-overlay p {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .hero-btn {
@@ -256,11 +397,11 @@ select {
 }
 
 .logo-text h1 {
-    font-size: 42px;
+    font-size: 44px;
 }
 
 .company-name {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .nav-links a {
@@ -284,11 +425,18 @@ select {
     font-size: 30px;
 }
 
-.services h2 {
-    font-size: 36px;
+.services h2,
+.reviews h2 {
+    font-size: 38px;
 }
 
-.service-card {
-    font-size: 18px;
+.service-card h3 {
+    font-size: 22px;
 }
+
+.assistant-popup {
+    width: 90%;
+    left: 5%;
 }
+
+    }
