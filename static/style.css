@@ -7,9 +7,23 @@ body {
 
 /* ASSISTANT */
 
+.assistant-toggle {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    background: #1565c0;
+    color: white;
+    padding: 18px 24px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.2);
+}
+
 .assistant-popup {
     position: fixed;
-    bottom: 100px;
+    bottom: 90px;
     left: 20px;
     width: 320px;
     background: white;
@@ -17,6 +31,7 @@ body {
     box-shadow: 0 8px 30px rgba(0,0,0,0.2);
     z-index: 9999;
     overflow: hidden;
+    display: none;
 }
 
 .assistant-header {
@@ -141,6 +156,46 @@ body {
     font-weight: bold;
 }
 
+/* WHY US */
+
+.why-us,
+.why-aluminium {
+    padding: 80px 20px;
+    text-align: center;
+    background: white;
+}
+
+.why-us h2,
+.why-aluminium h2 {
+    font-size: 56px;
+    margin-bottom: 50px;
+}
+
+.why-grid,
+.aluminium-grid {
+    display: grid;
+    grid-template-columns:
+    repeat(auto-fit, minmax(250px,1fr));
+
+    gap: 24px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.why-card,
+.aluminium-card {
+    background: #f5f5f5;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+.why-card h3,
+.aluminium-card h3 {
+    color: #1565c0;
+    font-size: 28px;
+}
+
 /* ESTIMATOR */
 
 .estimator-section {
@@ -205,8 +260,8 @@ textarea {
 .add-btn {
     width: 100%;
     padding: 16px;
-    background: silver;
-    color: #222;
+    background: #1565c0;
+    color: white;
     border: none;
     border-radius: 10px;
     margin: 20px 0;
@@ -309,9 +364,22 @@ textarea {
     font-size: 52px;
 }
 
-.review-text {
-    font-size: 20px;
-    color: #666;
+.review-slider {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.review-slide {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    display: none;
+    font-size: 22px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+.review-slide.active {
+    display: block;
 }
 
 .review-box {
@@ -338,10 +406,17 @@ textarea {
     font-size: 20px;
 }
 
+.stars {
+    font-size: 38px;
+    color: gold;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
 /* FOOTER */
 
 .footer {
-    background: #111;
+    background: #1565c0;
     color: white;
     text-align: center;
     padding: 50px 20px;
@@ -367,6 +442,32 @@ textarea {
     right: 20px;
     bottom: 90px;
     background: #1877f2;
+    color: white;
+    text-decoration: none;
+    padding: 18px 24px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.floating-email {
+    position: fixed;
+    right: 20px;
+    bottom: 160px;
+    background: #ff9800;
+    color: white;
+    text-decoration: none;
+    padding: 18px 24px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.floating-call {
+    position: fixed;
+    right: 20px;
+    bottom: 230px;
+    background: #444;
     color: white;
     text-decoration: none;
     padding: 18px 24px;
@@ -426,17 +527,29 @@ textarea {
 }
 
 .services h2,
-.reviews h2 {
+.reviews h2,
+.why-us h2,
+.why-aluminium h2 {
     font-size: 38px;
 }
 
-.service-card h3 {
+.service-card h3,
+.why-card h3,
+.aluminium-card h3 {
     font-size: 22px;
 }
 
 .assistant-popup {
     width: 90%;
     left: 5%;
+}
+
+.floating-call,
+.floating-email,
+.floating-facebook,
+.floating-whatsapp {
+    font-size: 14px;
+    padding: 14px 18px;
 }
 
     }
