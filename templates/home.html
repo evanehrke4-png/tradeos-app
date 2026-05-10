@@ -7,6 +7,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
+    <meta name="description"
+          content="Professional aluminium windows, doors, glass systems, shopfronts and container conversions in Johannesburg.">
+
     <link rel="stylesheet"
           href="/static/style.css">
 
@@ -14,9 +17,19 @@
 
 <body>
 
+<!-- ASSISTANT BUTTON -->
+
+<div class="assistant-toggle"
+     onclick="toggleAssistant()">
+
+    ACD Assistant 💬
+
+</div>
+
 <!-- ASSISTANT POPUP -->
 
-<div class="assistant-popup" id="assistantPopup">
+<div class="assistant-popup"
+     id="assistantPopup">
 
     <div class="assistant-header">
         ACD Assistant 👋
@@ -29,41 +42,55 @@
         </p>
 
         <p>
-            I can help you with the following:
+            Choose an option below:
         </p>
 
         <div class="assistant-buttons">
 
-            <a href="#services">View Products</a>
+            <a href="#services">
+                View Services
+            </a>
 
-            <a href="#services">Explore Services</a>
+            <a href="#estimator">
+                Get Instant Estimate
+            </a>
 
-            <a href="#estimator">Get Instant Estimates</a>
+            <a href="{{whatsapp_visit}}"
+               target="_blank">
 
-            <a href="{{whatsapp_visit}}" target="_blank">
-                Book a Site Visit
+                Book Site Visit
             </a>
 
             <a href="https://wa.me/27791532379"
                target="_blank">
 
-               Contact Us on WhatsApp
+               WhatsApp Chris
             </a>
 
-            <a href="https://www.facebook.com/share/1L4xfwdMGR/"
-               target="_blank">
+            <a href="mailto:evanehrke8@gmail.com">
 
-               Visit Our Facebook Page
+               Email Evan
             </a>
 
-            <a href="#reviews">
-                Leave a Review
+            <a href="mailto:chris.kleynhans76@gmail.com">
+
+               Email Chris
+            </a>
+
+            <a href="tel:+27744399710">
+
+               Call Evan
+            </a>
+
+            <a href="tel:+27791532379">
+
+               Call Chris
             </a>
 
         </div>
 
         <button class="assistant-close"
-                onclick="closeAssistant()">
+                onclick="toggleAssistant()">
 
             Close
 
@@ -127,6 +154,125 @@
 
 </section>
 
+<!-- WHY CHOOSE US -->
+
+<section class="why-us">
+
+<h2>Why Choose ACD?</h2>
+
+<div class="why-grid">
+
+<div class="why-card">
+
+<h3>Professional Workmanship</h3>
+
+<p>
+Precision workmanship,
+quality finishes and
+attention to detail.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<h3>Fast Turnaround</h3>
+
+<p>
+Efficient manufacturing
+and installation timelines
+you can depend on.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<h3>Trusted Service</h3>
+
+<p>
+Reliable customer service
+and honest professional advice.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<h3>Modern Systems</h3>
+
+<p>
+Premium aluminium and
+glass systems built
+for modern living.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- WHY ALUMINIUM -->
+
+<section class="why-aluminium">
+
+<h2>Why Aluminium & Glass?</h2>
+
+<div class="aluminium-grid">
+
+<div class="aluminium-card">
+
+<h3>Modern Appearance</h3>
+
+<p>
+Increase the value and
+appearance of your property
+with sleek modern finishes.
+</p>
+
+</div>
+
+<div class="aluminium-card">
+
+<h3>Low Maintenance</h3>
+
+<p>
+Aluminium systems are durable,
+rust resistant and built
+to last for years.
+</p>
+
+</div>
+
+<div class="aluminium-card">
+
+<h3>Energy Efficient</h3>
+
+<p>
+Improve lighting,
+ventilation and insulation
+through quality glass systems.
+</p>
+
+</div>
+
+<div class="aluminium-card">
+
+<h3>Strong Investment</h3>
+
+<p>
+Premium aluminium upgrades
+increase property value
+and buyer appeal.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
 <!-- ESTIMATOR -->
 
 <section class="estimator-section"
@@ -151,19 +297,19 @@
 
 <select name="product">
 
-  <option>Single Hinge Door</option>
-  <option>Double Hinge Door</option>
-  <option>Sliding Door (Heavy Duty)</option>
-  <option>Sliding Door (Light Duty)</option>
-  <option>Pivot Door</option>
-  <option>Folding Door (3 Leaf)</option>
-  <option>Folding Door (5 Leaf)</option>
-  <option>Folding Door (7 Leaf)</option>
-  <option>Top Hung Window</option>
-  <option>Side Hung Window</option>
-  <option>Sliding Window</option>
-  <option>Stacking Window</option>
-  <option>Fixed Panel / Shopfront</option>
+<option>Single Hinge Door</option>
+<option>Double Hinge Door</option>
+<option>Sliding Door (Heavy Duty)</option>
+<option>Sliding Door (Light Duty)</option>
+<option>Pivot Door</option>
+<option>Folding Door (3 Leaf)</option>
+<option>Folding Door (5 Leaf)</option>
+<option>Folding Door (7 Leaf)</option>
+<option>Top Hung Window</option>
+<option>Side Hung Window</option>
+<option>Sliding Window</option>
+<option>Stacking Window</option>
+<option>Fixed Panel / Shopfront</option>
 
 </select>
 
@@ -171,11 +317,11 @@
 
 <select name="colour">
 
-  <option>White</option>
-  <option>Bronze</option>
-  <option>Black</option>
-  <option>Charcoal</option>
-  <option>Natural</option>
+<option>White</option>
+<option>Bronze</option>
+<option>Black</option>
+<option>Charcoal</option>
+<option>Natural</option>
 
 </select>
 
@@ -186,6 +332,7 @@
 <input type="number" name="height">
 
 <label>Quantity</label>
+
 <input type="number"
        name="qty"
        value="1">
@@ -247,8 +394,8 @@ R{{price_low}} - R{{price_high}}
 <li>
 Prices include manufacturing,
 standard installation,
-and delivery within a 30KM radius
-of Johannesburg.
+and delivery within
+a 30KM radius of Johannesburg.
 </li>
 
 <li>
@@ -256,7 +403,8 @@ All prices exclude 15% VAT.
 </li>
 
 <li>
-Estimates are based on standard specifications.
+Estimates are based on
+standard specifications.
 </li>
 
 </ul>
@@ -296,7 +444,8 @@ Book Site Visit
 <h2>Our Services</h2>
 
 <p class="services-subtitle">
-Select a service to learn more.
+Professional aluminium,
+glass and modular solutions.
 </p>
 
 <div class="service-grid">
@@ -307,8 +456,7 @@ Select a service to learn more.
 
 <p>
 Modern aluminium window systems
-designed for durability,
-style, ventilation and security.
+for homes and commercial spaces.
 </p>
 
 </div>
@@ -318,29 +466,19 @@ style, ventilation and security.
 <h3>Aluminium Doors</h3>
 
 <p>
-Premium aluminium door systems
-for residential, commercial
-and architectural applications.
+Premium sliding, folding,
+pivot and hinged door systems.
 </p>
-
-<ul>
-<li>Single Hinge Doors</li>
-<li>Double Hinge Doors</li>
-<li>Pivot Doors</li>
-<li>Heavy Duty Sliding Doors</li>
-<li>Light Duty Sliding Doors</li>
-<li>Vista Folding Stacking Doors</li>
-</ul>
 
 </div>
 
 <div class="service-card">
 
-<h3>Aluminium Shopfronts</h3>
+<h3>Shopfronts</h3>
 
 <p>
 Professional shopfront solutions
-for retail, office and commercial spaces.
+for retail and commercial spaces.
 </p>
 
 </div>
@@ -350,26 +488,19 @@ for retail, office and commercial spaces.
 <h3>Maintenance & Repairs</h3>
 
 <p>
-Repairs, servicing and maintenance
-for aluminium systems,
-glass and general installations.
+Professional aluminium,
+glass and hardware repairs.
 </p>
 
 </div>
 
 <div class="service-card">
 
-<h3>
-Modular Insulated Structures &
-Container Conversions
-</h3>
+<h3>Container Conversions</h3>
 
 <p>
-Custom-built modular structures,
-mobile insulated units,
-offices, classrooms,
-storage facilities and
-shipping container conversions.
+Custom modular insulated structures
+and shipping container conversions.
 </p>
 
 </div>
@@ -385,17 +516,51 @@ shipping container conversions.
 
 <h2>Customer Reviews</h2>
 
-<p class="review-text">
+<div class="review-slider">
 
-Customer reviews are reviewed
-before being published publicly.
+<div class="review-slide active">
 
+★★★★★
+
+<p>
+Excellent workmanship and
+very professional service.
 </p>
+
+<strong>- Residential Client</strong>
+
+</div>
+
+<div class="review-slide">
+
+★★★★★
+
+<p>
+Fast turnaround time and
+quality installations.
+Highly recommended.
+</p>
+
+<strong>- Commercial Client</strong>
+
+</div>
+
+</div>
 
 <div class="review-box">
 
 <input type="text"
        placeholder="Your Name">
+
+<div class="stars">
+
+<span>★</span>
+<span>★</span>
+<span>★</span>
+<span>★</span>
+<span>★</span>
+
+</div>
 
 <textarea placeholder="Leave your review here..."></textarea>
 
@@ -445,6 +610,20 @@ Facebook
 
 </a>
 
+<a href="mailto:evanehrke8@gmail.com"
+   class="floating-email">
+
+Email
+
+</a>
+
+<a href="tel:+27744399710"
+   class="floating-call">
+
+Call
+
+</a>
+
 <script>
 
 function addItem() {
@@ -455,17 +634,60 @@ function addItem() {
     const item =
     container.children[0].cloneNode(true);
 
+    item.querySelectorAll("input").forEach(input => {
+
+        if(input.name !== "qty") {
+            input.value = "";
+        }
+
+    });
+
     container.appendChild(item);
 }
 
-function closeAssistant() {
+function toggleAssistant() {
 
-    document.getElementById(
-        "assistantPopup"
-    ).style.display = "none";
+    const popup =
+    document.getElementById("assistantPopup");
+
+    if (popup.style.display === "block") {
+
+        popup.style.display = "none";
+
+    } else {
+
+        popup.style.display = "block";
+    }
 }
+
+/* REVIEW SLIDESHOW */
+
+let slideIndex = 0;
+
+const slides =
+document.querySelectorAll(".review-slide");
+
+function showSlides() {
+
+    slides.forEach(slide => {
+        slide.classList.remove("active");
+    });
+
+    slideIndex++;
+
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+
+    slides[slideIndex - 1]
+    .classList.add("active");
+
+    setTimeout(showSlides, 4000);
+}
+
+showSlides();
 
 </script>
 
 </body>
-</html>
+    </html>
