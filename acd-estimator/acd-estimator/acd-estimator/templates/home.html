@@ -1,1 +1,226 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+
+    <title>ACD Instant Estimator</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+</head>
+
+<body>
+
+<section class="estimator-section">
+
+<div class="container">
+
+<div class="card">
+
+<img src="/static/logo.png"
+     class="estimator-logo">
+
+<h2>ACD Instant Estimator</h2>
+
+<form method="POST">
+
+<div id="items">
+
+<div class="item">
+
+<label>Product Type</label>
+
+<select name="product">
+
+<option>Single Hinge Door</option>
+<option>Double Hinge Door</option>
+<option>Sliding Door (Heavy Duty)</option>
+<option>Sliding Door (Light Duty)</option>
+<option>Pivot Door</option>
+<option>Folding Door (3 Leaf)</option>
+<option>Folding Door (5 Leaf)</option>
+<option>Folding Door (7 Leaf)</option>
+<option>Top Hung Window</option>
+<option>Side Hung Window</option>
+<option>Sliding Window</option>
+<option>Stacking Window</option>
+<option>Fixed Panel / Shopfront</option>
+
+</select>
+
+<label>Aluminium Colour</label>
+
+<select name="colour">
+
+<option>White</option>
+<option>Bronze</option>
+<option>Black</option>
+<option>Charcoal</option>
+<option>Natural</option>
+
+</select>
+
+<label>Width (mm)</label>
+<input type="number" name="width">
+
+<label>Height (mm)</label>
+<input type="number" name="height">
+
+<label>Quantity</label>
+
+<input type="number"
+       name="qty"
+       value="1">
+
+<hr>
+
+</div>
+
+</div>
+
+<button type="button"
+        class="add-btn"
+        onclick="addItem()">
+
++ Add Another Item
+
+</button>
+
+<label>Your Name</label>
+<input name="name" required>
+
+<label>Phone Number</label>
+<input name="phone" required>
+
+<label>Your Area</label>
+<input name="area">
+
+<button type="submit"
+        class="main-btn">
+
+Get Estimate
+
+</button>
+
+</form>
+
+{% if price_low %}
+
+<div class="result">
+
+<strong>Item Breakdown</strong>
+
+<br><br>
+
+{{ breakdown|safe }}
+
+<strong>Total Estimate</strong>
+
+<br><br>
+
+R{{price_low}} - R{{price_high}}
+
+<div class="disclaimer">
+
+<strong>Please Note:</strong>
+
+<ul>
+
+<li>
+Prices include manufacturing,
+standard installation,
+and delivery within
+a 30KM radius of Johannesburg.
+</li>
+
+<li>
+All prices exclude 15% VAT.
+</li>
+
+<li>
+Estimates are based on
+standard specifications.
+</li>
+
+</ul>
+
+</div>
+
+<a class="whatsapp"
+   href="{{whatsapp}}"
+   target="_blank">
+
+Send via WhatsApp
+
+</a>
+
+<a class="whatsapp"
+   href="{{whatsapp_visit}}"
+   target="_blank">
+
+Book Site Visit
+
+</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</section>
+
+<a href="https://wa.me/27791532379"
+   class="floating-whatsapp"
+   target="_blank">
+
+WhatsApp
+
+</a>
+
+<a href="mailto:evanehrke8@gmail.com"
+   class="floating-email">
+
+Email
+
+</a>
+
+<a href="tel:+27744399710"
+   class="floating-call">
+
+Call
+
+</a>
+
+<script>
+
+function addItem() {
+
+    const container =
+    document.getElementById("items");
+
+    const item =
+    container.children[0].cloneNode(true);
+
+    item.querySelectorAll("input").forEach(input => {
+
+        if(input.name !== "qty") {
+
+            input.value = "";
+        }
+
+    });
+
+    container.appendChild(item);
+}
+
+</script>
+
+</body>
+</html>
