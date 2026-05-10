@@ -1,1 +1,184 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #e9ecef;
+    color: #222;
+}
 
+.estimator-section {
+    padding: 40px 15px;
+}
+
+.container {
+    max-width: 950px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+.estimator-logo {
+    width: 240px;
+    max-width: 90%;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.card h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 44px;
+    color: #1565c0;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.item label:nth-child(1),
+.item select:nth-child(2),
+.item label:nth-child(3),
+.item select:nth-child(4) {
+    grid-column: span 2;
+}
+
+label {
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 16px;
+    background: #1565c0;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.main-btn {
+    width: 100%;
+    padding: 18px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.result {
+    background: #f8f8f8;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+.breakdown-item {
+    margin-bottom: 18px;
+}
+
+.whatsapp {
+    display: block;
+    margin-top: 20px;
+    color: #25D366;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.disclaimer {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.floating-whatsapp {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    padding: 18px 24px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.floating-email {
+    position: fixed;
+    right: 20px;
+    bottom: 90px;
+    background: #ff9800;
+    color: white;
+    text-decoration: none;
+    padding: 18px 24px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.floating-call {
+    position: fixed;
+    right: 20px;
+    bottom: 160px;
+    background: #444;
+    color: white;
+    text-decoration: none;
+    padding: 18px 24px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+
+.card {
+    padding: 25px;
+}
+
+.card h2 {
+    font-size: 30px;
+}
+
+.item {
+    grid-template-columns: 1fr;
+}
+
+.item label:nth-child(1),
+.item select:nth-child(2),
+.item label:nth-child(3),
+.item select:nth-child(4) {
+    grid-column: span 1;
+}
+
+.floating-call,
+.floating-email,
+.floating-whatsapp {
+    font-size: 14px;
+    padding: 14px 18px;
+}
+
+}
